@@ -260,7 +260,7 @@ export default function Home() {
       {/* ── Brand Strip ── */}
       <section className="brand-strip-minimal gsap-fade-up">
         <div className="container">
-          <p className="brand-strip-minimal__text">M-ECOMMERCE — PURE ELEGANCE, UNCOMPROMISED QUALITY.</p>
+          <p className="brand-strip-minimal__text">M-COLLECTION — PURE ELEGANCE, UNCOMPROMISED QUALITY.</p>
         </div>
       </section>
     </main>
