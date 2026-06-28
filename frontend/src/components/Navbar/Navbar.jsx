@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { logout } from '../../redux/slices/authSlice';
@@ -9,6 +9,8 @@ import './Navbar.css';
 const Navbar = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
 
   const authState = useSelector((state) => state.auth || {});
   const user = authState.user;
@@ -28,6 +30,15 @@ const Navbar = () => {
   const handleLogout = () => {
     dispatch(logout());
     navigate('/');
+  };
+
+  const handleSearchSubmit = (e) => {
+    e.preventDefault();
+    if (searchQuery.trim()) {
+      navigate(`/products?search=${encodeURIComponent(searchQuery.trim())}`);
+      setIsSearchOpen(false);
+      setSearchQuery('');
+    }
   };
 
   return (
@@ -83,8 +94,27 @@ const Navbar = () => {
           </Link>
         </nav>
 
-        {/* Actions (Theme Toggle, Cart, Profile/Login) */}
+        {/* Actions (Theme Toggle, Search, Cart, Profile/Login) */}
         <div className="navbar__actions">
+          {/* Search Bar */}
+          <div className={`navbar__search ${isSearchOpen ? 'navbar__search--open' : ''}`}>
+            <button 
+              className="navbar__action-btn navbar__search-btn" 
+              onClick={() => setIsSearchOpen(!isSearchOpen)}
+              aria-label="Toggle Search"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+            </button>
+            <form onSubmit={handleSearchSubmit} className="navbar__search-form">
+              <input 
+                type="text" 
+                className="navbar__search-input" 
+                placeholder="Search..." 
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+              />
+            </form>
+          </div>
           <button
             className="navbar__action-btn"
             onClick={() => dispatch(toggleTheme())}

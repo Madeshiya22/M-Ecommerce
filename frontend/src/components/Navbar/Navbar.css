@@ -21,9 +21,47 @@
   align-items: center;
   position: relative;
   font-family: var(--font-display, sans-serif);
-  font-size: 0.75rem;
-  letter-spacing: 0.1em;
-  font-weight: 600;
+  font-size: 0.9rem;
+  letter-spacing: 0.05em;
+  transition: all 0.3s ease;
+}
+
+.navbar__search {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.navbar__search-form {
+  width: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+  display: flex;
+  align-items: center;
+}
+
+.navbar__search--open .navbar__search-form {
+  width: 200px;
+  opacity: 1;
+  margin-left: 8px;
+}
+
+.navbar__search-input {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid var(--clr-border);
+  border-radius: 20px;
+  background: var(--clr-bg);
+  color: var(--clr-text);
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+.navbar__search-input:focus {
+  border-color: var(--clr-primary);
 }
 
 .navbar__marquee-track {

@@ -39,7 +39,7 @@
 
 .hero-editorial__title {
   font-family: 'Panchang', sans-serif;
-  font-size: clamp(1.5rem, 7.5vw, 10rem);
+  font-size: clamp(1.5rem, 8vw, 13rem);
   font-weight: 600;
   line-height: 0.82;
   letter-spacing: 0;
