@@ -1,26 +1,30 @@
 import React, { useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
-import { motion } from 'framer-motion';
 import { useDispatch } from 'react-redux';
-import { FiMail, FiLock, FiUser, FiEye, FiEyeOff, FiArrowRight } from 'react-icons/fi';
+import { 
+  FiMail, FiLock, FiEye, FiEyeOff, FiLogIn
+} from 'react-icons/fi';
+import { FaGoogle, FaFacebookF, FaCrown, FaShieldAlt, FaTruck, FaCheckCircle, FaTag, FaHeadset } from 'react-icons/fa';
 import { loginSuccess } from '../redux/slices/authSlice';
 import { authService } from '../services';
 import toast from 'react-hot-toast';
 import './Auth.css';
+import authBg from '../assets/auth-bg.jpg';
 
 export default function Login() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || '/';
-
+  
   const [form, setForm] = useState({ email: '', password: '' });
   const [showPass, setShowPass] = useState(false);
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!form.email || !form.password) return toast.error('Please fill all fields');
+    if (!form.email || !form.password) return toast.error('Please fill required fields');
+
     setLoading(true);
     try {
       const res = await authService.login(form);
@@ -37,72 +41,95 @@ export default function Login() {
 
   return (
     <div className="auth-page">
-      <div className="auth-deco">
-        <div className="auth-deco__circle auth-deco__circle--1" />
-        <div className="auth-deco__circle auth-deco__circle--2" />
-        <div className="auth-deco__text">MECOMMERCE</div>
-      </div>
-      <div className="auth-form-wrap">
-        <motion.div className="auth-card" initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }}>
-          <div className="auth-card__header">
-            <Link to="/" className="auth-logo">M<span>ECOMMERCE</span></Link>
-            <h1 className="auth-card__title">Welcome back</h1>
-            <p className="auth-card__sub">Sign in to your account to continue</p>
+      <div className="auth-container">
+        {/* Left Panel */}
+        <div className="auth-left" style={{ 
+          backgroundImage: `url(${authBg})`,
+          backgroundColor: '#000',
+          backgroundSize: 'contain',
+          backgroundPosition: 'center'
+        }}>
+          {/* Logo and badges are baked into the background image */}
+        </div>
+        
+        {/* Right Panel */}
+        <div className="auth-right">
+          <div className="auth-top-tag">
+            <FaTag size={12} /> Welcome Back
           </div>
-
+          
+          <div className="auth-header">
+            <div className="auth-title-wrap">
+              <div className="auth-icon-circle"><FiLogIn size={24} /></div>
+              <h1 className="auth-title">Login to <span className="auth-title-accent">Account</span></h1>
+            </div>
+            <p className="auth-subtitle">Welcome back! Please enter your details to login.</p>
+          </div>
+          
           <form className="auth-form" onSubmit={handleSubmit}>
-            <div className="form-group">
-              <label className="form-label">Email Address</label>
-              <div className="input-wrap">
-                <FiMail className="input-icon" size={16} />
+            <div className="auth-group">
+              <label className="auth-label">Email Address</label>
+              <div className="auth-input-wrap">
+                <FiMail className="auth-input-icon" size={18} />
                 <input
                   type="email"
-                  className="form-input input-with-icon"
-                  placeholder="you@example.com"
+                  className="auth-input"
+                  placeholder="Enter your email address"
                   value={form.email}
                   onChange={(e) => setForm({ ...form, email: e.target.value })}
-                  autoComplete="email"
+                  required
                 />
               </div>
             </div>
-
-            <div className="form-group">
-              <label className="form-label">Password</label>
-              <div className="input-wrap">
-                <FiLock className="input-icon" size={16} />
+            
+            <div className="auth-group">
+              <label className="auth-label">Password</label>
+              <div className="auth-input-wrap">
+                <FiLock className="auth-input-icon" size={18} />
                 <input
                   type={showPass ? 'text' : 'password'}
-                  className="form-input input-with-icon input-with-action"
-                  placeholder="••••••••"
+                  className="auth-input"
+                  placeholder="Enter your password"
                   value={form.password}
                   onChange={(e) => setForm({ ...form, password: e.target.value })}
-                  autoComplete="current-password"
+                  required
                 />
-                <button type="button" className="input-action" onClick={() => setShowPass(!showPass)}>
-                  {showPass ? <FiEyeOff size={16} /> : <FiEye size={16} />}
+                <button type="button" className="auth-input-action" onClick={() => setShowPass(!showPass)}>
+                  {showPass ? <FiEyeOff size={18} /> : <FiEye size={18} />}
                 </button>
               </div>
             </div>
-
-            <button type="submit" className="btn btn-primary w-full btn-lg" disabled={loading}>
-              {loading ? <span className="spinner" /> : <><span>Sign In</span><FiArrowRight /></>}
+            
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', margin: '10px 0' }}>
+              <div className="auth-checkbox-wrap" style={{ margin: 0 }}>
+                <input type="checkbox" className="auth-checkbox" />
+                <span className="auth-checkbox-text">Remember me</span>
+              </div>
+              <Link to="#" className="auth-footer-link" style={{ fontSize: '0.85rem' }}>Forgot password?</Link>
+            </div>
+            
+            <button type="submit" className="auth-btn-primary" disabled={loading}>
+              {loading ? 'Logging in...' : <><FiLogIn size={18} /> Login to Account</>}
             </button>
           </form>
-
-          <div className="auth-card__footer">
-            <p>Don't have an account? <Link to="/register" className="auth-link">Create one</Link></p>
+          
+          <div className="auth-divider">
+            <span>or login with</span>
           </div>
-
-          <div className="auth-divider"><span>or try demo</span></div>
-          <div className="auth-demo">
-            <button className="btn btn-ghost btn-sm" onClick={() => setForm({ email: 'admin@mecommerce.com', password: 'Admin@123' })}>
-              Admin Demo
+          
+          <div className="auth-social-wrap">
+            <button className="auth-btn-social" type="button" onClick={() => toast('Google auth coming soon!')}>
+              <FaGoogle color="#DB4437" /> Login with Google
             </button>
-            <button className="btn btn-ghost btn-sm" onClick={() => setForm({ email: 'user@mecommerce.com', password: 'User@123' })}>
-              User Demo
+            <button className="auth-btn-social" type="button" onClick={() => toast('Facebook auth coming soon!')}>
+              <FaFacebookF color="#4267B2" /> Login with Facebook
             </button>
           </div>
-        </motion.div>
+          
+          <div className="auth-footer">
+            Don't have an account? <Link to="/register" className="auth-footer-link">Sign up</Link>
+          </div>
+        </div>
       </div>
     </div>
   );

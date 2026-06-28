@@ -71,17 +71,18 @@ export default function Home() {
           {/* 2-Column Layout: Editorial Text (Left) + Floating Tilted Image Cards (Right) */}
           <div className="hero-editorial__content">
             {/* Left Column: Editorial Info */}
-            <div className="hero-editorial__info-col">
+            <div className="hero-editorial__info-col" style={{ marginTop: '100px' }}>
               <div className="hero-editorial__block">
-                <h4 className="hero-editorial__sub-title">Welcome portal</h4>
+                <h4 className="hero-editorial__sub-title">Premium Collection</h4>
                 <p className="hero-editorial__desc">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad, modi repellat est officia minima fugit.
+                  Discover the finest selection of premium shirts and t-shirts, crafted with meticulous attention to detail and designed for the modern trendsetter.
                 </p>
               </div>
+
               <div className="hero-editorial__block">
-                <h4 className="hero-editorial__sub-title">Progress</h4>
+                <h4 className="hero-editorial__sub-title">Our Legacy</h4>
                 <p className="hero-editorial__desc">
-                  Lorem ipsum dolor sit amet.
+                  A commitment to excellence, delivering high-quality fabrics and unparalleled comfort that redefines everyday fashion for you.
                 </p>
               </div>
             </div>
