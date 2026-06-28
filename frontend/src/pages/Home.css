@@ -630,3 +630,20 @@
 .dual-image-right:hover img {
   transform: scale(1.05);
 }
+
+/* ── Video Banner Section ── */
+.video-banner-section {
+  width: 100%;
+  padding: 0;
+  display: flex;
+  overflow: hidden;
+  background: #000;
+}
+
+.promo-video {
+  width: 100%;
+  height: auto;
+  max-height: 85vh;
+  object-fit: cover;
+  display: block;
+}

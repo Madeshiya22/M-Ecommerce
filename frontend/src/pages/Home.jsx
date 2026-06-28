@@ -10,6 +10,7 @@ import ProductCard from '../components/ProductCard/ProductCard';
 import './Home.css';
 import leftImg from '../assets/left.png';
 import rightImg from '../assets/right.png';
+import shirtVideo from '../assets/shirt.mp4';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -173,6 +174,18 @@ export default function Home() {
             ))}
           </div>
         </div>
+      </section>
+
+      {/* ── Auto-Play Video Banner ── */}
+      <section className="video-banner-section gsap-fade-up">
+        <video 
+          className="promo-video" 
+          src={shirtVideo} 
+          autoPlay 
+          loop 
+          muted 
+          playsInline
+        />
       </section>
 
       {/* ── M-Favourites ── */}
