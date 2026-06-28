@@ -8,6 +8,8 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { productService } from '../services';
 import ProductCard from '../components/ProductCard/ProductCard';
 import './Home.css';
+import leftImg from '../assets/left.png';
+import rightImg from '../assets/right.png';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -128,6 +130,18 @@ export default function Home() {
                 <p className="feature-minimal-item__desc">{desc}</p>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── Dual Image Section ── */}
+      <section className="dual-image-section gsap-fade-up">
+        <div className="dual-image-wrapper">
+          <div className="dual-image-left">
+            <img src={leftImg} alt="Left" />
+          </div>
+          <div className="dual-image-right">
+            <img src={rightImg} alt="Right" />
           </div>
         </div>
       </section>
