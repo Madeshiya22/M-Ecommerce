@@ -15,12 +15,12 @@ import shirtVideo from '../assets/shirt.mp4';
 gsap.registerPlugin(ScrollTrigger);
 
 const CATEGORIES_DISPLAY = [
-  { name: 'Oversized Tees', type: 'tshirt', tag: 'T-Shirt', href: '/shop?type=tshirt&category=oversized-tees', desc: 'Relaxed street-ready fits' },
-  { name: 'Graphic Tees', type: 'tshirt', tag: 'T-Shirt', href: '/shop?type=tshirt&category=graphic-tees', desc: 'Bold artistic expressions' },
-  { name: 'Casual Shirts', type: 'shirt', tag: 'Shirt', href: '/shop?type=shirt&category=casual-shirts', desc: 'Effortless everyday style' },
-  { name: 'Formal Shirts', type: 'shirt', tag: 'Shirt', href: '/shop?type=shirt&category=formal-shirts', desc: 'Sharp, sophisticated tailoring' },
-  { name: 'Denim Shirts', type: 'shirt', tag: 'Shirt', href: '/shop?type=shirt&category=denim-shirts', desc: 'Rugged premium denim' },
-  { name: 'Polo T-Shirts', type: 'tshirt', tag: 'T-Shirt', href: '/shop?type=tshirt&category=polo-t-shirts', desc: 'Classic elevated casuals' },
+  { name: 'Oversized Tees', type: 'tshirt', tag: 'T-Shirt', href: '/shop?type=tshirt&category=oversized-tees', desc: 'Relaxed street-ready fits', img: 'https://images.unsplash.com/photo-1571455786673-9d9d6c194f90?q=80&w=800&auto=format&fit=crop' },
+  { name: 'Graphic Tees', type: 'tshirt', tag: 'T-Shirt', href: '/shop?type=tshirt&category=graphic-tees', desc: 'Bold artistic expressions', img: 'https://images.unsplash.com/photo-1503342394128-c104d54dba01?q=80&w=800&auto=format&fit=crop' },
+  { name: 'Casual Shirts', type: 'shirt', tag: 'Shirt', href: '/shop?type=shirt&category=casual-shirts', desc: 'Effortless everyday style', img: 'https://images.unsplash.com/photo-1596755094514-f87e32f85e2c?q=80&w=800&auto=format&fit=crop' },
+  { name: 'Formal Shirts', type: 'shirt', tag: 'Shirt', href: '/shop?type=shirt&category=formal-shirts', desc: 'Sharp, sophisticated tailoring', img: 'https://images.unsplash.com/photo-1594938298603-c8148c4dae35?q=80&w=800&auto=format&fit=crop' },
+  { name: 'Denim Shirts', type: 'shirt', tag: 'Shirt', href: '/shop?type=shirt&category=denim-shirts', desc: 'Rugged premium denim', img: 'https://images.unsplash.com/photo-1534452203293-494d7ddbf7e0?q=80&w=800&auto=format&fit=crop' },
+  { name: 'Polo T-Shirts', type: 'tshirt', tag: 'T-Shirt', href: '/shop?type=tshirt&category=polo-t-shirts', desc: 'Classic elevated casuals', img: 'https://images.unsplash.com/photo-1628157588553-5eeea00af15c?q=80&w=800&auto=format&fit=crop' },
 ];
 
 const FEATURES = [
@@ -155,12 +155,13 @@ export default function Home() {
             <h2 className="section-title">Essential Classifications</h2>
           </div>
           <div className="categories-minimal__grid">
-            {CATEGORIES_DISPLAY.map(({ name, tag, desc, href }) => (
+            {CATEGORIES_DISPLAY.map(({ name, tag, desc, href, img }) => (
               <motion.div
                 key={name}
                 className="category-minimal-card gsap-fade-up"
                 whileHover={{ y: -4 }}
                 transition={{ duration: 0.2 }}
+                style={{ backgroundImage: `url(${img})` }}
               >
                 <Link to={href} className="category-minimal-card__inner">
                   <div className="category-minimal-card__header">

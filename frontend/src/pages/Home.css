@@ -366,29 +366,36 @@
   gap: var(--space-6);
 }
 
+.category-minimal-card {
+  position: relative;
+  background-size: cover;
+  background-position: center;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  height: 280px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
 .category-minimal-card__inner {
   display: flex;
   flex-direction: column;
-  background: var(--clr-surface);
-  border: 1px solid var(--clr-border);
+  justify-content: space-between;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.1) 100%);
   border-radius: var(--radius-lg);
   padding: var(--space-8);
   transition: all var(--transition-base);
   height: 100%;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+  text-decoration: none;
 }
 
 .category-minimal-card:hover .category-minimal-card__inner {
-  border-color: var(--clr-primary);
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
-  transform: translateY(-4px);
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.0) 100%);
 }
 
 .category-minimal-card__header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: var(--space-6);
 }
 
 .category-minimal-card__tag {
@@ -396,36 +403,37 @@
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.15em;
-  color: var(--clr-text-muted);
-  background: var(--clr-surface-2);
+  color: #fff;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(8px);
   padding: 4px 12px;
   border-radius: var(--radius-full);
-  border: 1px solid var(--clr-border);
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .category-minimal-card__arrow {
   font-size: 1.2rem;
-  color: var(--clr-text-muted);
+  color: #fff;
   transition: all var(--transition-fast);
 }
 
 .category-minimal-card:hover .category-minimal-card__arrow {
-  color: var(--clr-primary);
-  transform: translateX(4px);
+  transform: translateX(4px) scale(1.1);
 }
 
 .category-minimal-card__name {
   font-family: var(--font-display);
   font-size: 2.2rem;
   letter-spacing: 0.02em;
-  color: var(--clr-text);
-  margin-bottom: 8px;
+  color: #fff;
+  margin-bottom: 6px;
   line-height: 1.1;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.5);
 }
 
 .category-minimal-card__desc {
   font-size: 0.9rem;
-  color: var(--clr-text-muted);
+  color: rgba(255, 255, 255, 0.85);
   line-height: 1.6;
 }
 
