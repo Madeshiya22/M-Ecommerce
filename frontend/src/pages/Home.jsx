@@ -96,7 +96,6 @@ export default function Home() {
 
               <div className="hero-editorial__card-wrapper hero-editorial__card-wrapper--2">
                 <div className="hero-editorial__card hero-editorial__card--2">
-                  <span className="hero-editorial__badge">1/10</span>
                   <img src="https://i.pinimg.com/736x/80/a9/a8/80a9a8c6db47f9615f61fb2bcb6e1a3f.jpg" alt="M-Collection Casual Shirt" />
                 </div>
               </div>
@@ -111,7 +110,7 @@ export default function Home() {
 
           {/* Bottom Bar */}
           <div className="hero-editorial__bottom-bar">
-            <span className="hero-editorial__bottom-left">New Collection</span>
+            <Link to="/new-collection" className="hero-editorial__bottom-left" style={{ color: 'inherit', textDecoration: 'none' }}>New Collection</Link>
             <Link to="/shop" className="hero-editorial__bottom-right">Shop the Look →</Link>
           </div>
         </div>

@@ -143,7 +143,7 @@
   width: clamp(120px, 12vw, 170px);
   /* Made even smaller as requested */
   aspect-ratio: 3 / 4;
-  left: 20%;
+  left: 18%;
   /* Moved right to overlap Card 2 perfectly */
   top: 5px;
   z-index: 2;
@@ -163,13 +163,11 @@
 
 .hero-editorial__card-wrapper--3 {
   width: clamp(150px, 15vw, 210px);
-  /* Made even smaller as requested */
   aspect-ratio: 3 / 4;
-  right: 26%;
-  /* Brought closer to the center/2nd image */
-  top: -20px;
+  right: 20%;
+  top: -35px;
   z-index: 3;
-  transform: rotate(-2deg);
+  transform: rotate(-5deg);
 }
 
 .hero-editorial__card-wrapper--1:hover {
@@ -204,7 +202,7 @@
 .hero-editorial__card-text-overlay {
   position: absolute;
   top: 12px;
-  left: 12px;
+  left: 10px;
   z-index: 10;
   display: flex;
   flex-direction: column;

@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   FiGrid, FiBox, FiTag, FiShoppingCart, FiUsers, FiMenu, FiX,
-  FiLogOut, FiExternalLink, FiChevronRight
+  FiLogOut, FiExternalLink, FiChevronRight, FiStar
 } from 'react-icons/fi';
 import { logout } from '../redux/slices/authSlice';
 import './AdminLayout.css';
@@ -13,6 +13,7 @@ const NAV_ITEMS = [
   { icon: FiGrid, label: 'Dashboard', to: '/admin' },
   { icon: FiBox, label: 'Products', to: '/admin/products' },
   { icon: FiTag, label: 'Categories', to: '/admin/categories' },
+  { icon: FiStar, label: 'New Collection', to: '/admin/new-collection' },
   { icon: FiShoppingCart, label: 'Orders', to: '/admin/orders' },
   { icon: FiUsers, label: 'Users', to: '/admin/users' },
 ];

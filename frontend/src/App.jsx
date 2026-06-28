@@ -12,6 +12,7 @@ import CartDrawer from './components/CartDrawer/CartDrawer';
 
 import Home from './pages/Home';
 import Shop from './pages/Shop';
+import NewCollection from './pages/NewCollection';
 import ProductDetail from './pages/ProductDetail';
 import Login from './pages/Login';
 import Register from './pages/Register';
@@ -24,6 +25,7 @@ import AdminProducts from './admin/AdminProducts';
 import AdminCategories from './admin/AdminCategories';
 import AdminOrders from './admin/AdminOrders';
 import AdminUsers from './admin/AdminUsers';
+import AdminNewCollection from './admin/AdminNewCollection';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -82,6 +84,7 @@ function AppRoutes() {
         {/* Public routes */}
         <Route path="/" element={<MainLayout><Home /></MainLayout>} />
         <Route path="/shop" element={<MainLayout><Shop /></MainLayout>} />
+        <Route path="/new-collection" element={<MainLayout><NewCollection /></MainLayout>} />
         <Route path="/product/:id" element={<MainLayout><ProductDetail /></MainLayout>} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
@@ -95,6 +98,7 @@ function AppRoutes() {
           <Route index element={<AdminDashboard />} />
           <Route path="products" element={<AdminProducts />} />
           <Route path="categories" element={<AdminCategories />} />
+          <Route path="new-collection" element={<AdminNewCollection />} />
           <Route path="orders" element={<AdminOrders />} />
           <Route path="users" element={<AdminUsers />} />
         </Route>

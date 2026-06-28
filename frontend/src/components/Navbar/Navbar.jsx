@@ -9,7 +9,7 @@ import './Navbar.css';
 const Navbar = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  
+
   const authState = useSelector((state) => state.auth || {});
   const user = authState.user;
 
@@ -35,18 +35,11 @@ const Navbar = () => {
       {/* ─── Top Moving Marquee Bar ─── */}
       <div className="navbar__marquee">
         <div className="navbar__marquee-track">
-          <span><span className="text-brown">M</span>-COLLECTION X ICONS</span>
-          <span><span className="text-brown">M</span>-COLLECTION X ICONS</span>
-          <span><span className="text-brown">M</span>-COLLECTION X ICONS</span>
-          <span><span className="text-brown">M</span>-COLLECTION X ICONS</span>
-          <span><span className="text-brown">M</span>-COLLECTION X ICONS</span>
-          <span><span className="text-brown">M</span>-COLLECTION X ICONS</span>
-          <span><span className="text-brown">M</span>-COLLECTION X ICONS</span>
-          <span><span className="text-brown">M</span>-COLLECTION X ICONS</span>
-          <span><span className="text-brown">M</span>-COLLECTION X ICONS</span>
-          <span><span className="text-brown">M</span>-COLLECTION X ICONS</span>
-          <span><span className="text-brown">M</span>-COLLECTION X ICONS</span>
-          <span><span className="text-brown">M</span>-COLLECTION X ICONS</span>
+          {Array(8).fill(0).map((_, i) => (
+            <span key={i}>
+              <span className="text-brown">M</span>-Collection &nbsp;&nbsp;•&nbsp;&nbsp; CASUAL SHIRTS &nbsp;&nbsp;•&nbsp;&nbsp; T-SHIRTS &nbsp;&nbsp;•&nbsp;&nbsp; FORMALS &nbsp;&nbsp;&nbsp;&nbsp;
+            </span>
+          ))}
         </div>
       </div>
 
