@@ -1,0 +1,578 @@
+/* ─── Premium Editorial Hero (M-COLLECTION) ─── */
+.hero-editorial {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  max-height: 100vh;
+  background: var(--clr-bg);
+  display: block;
+  overflow: hidden;
+  border-bottom: 1px solid var(--clr-border);
+  padding-top: 102px;
+  /* Accounts for fixed navbar + marquee bar so content begins exactly below */
+  box-sizing: border-box;
+}
+
+.hero-editorial__inner {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  height: calc(100vh - 102px);
+  max-height: calc(100vh - 102px);
+  min-height: 0;
+  overflow: hidden;
+  padding-top: 10px;
+  box-sizing: border-box;
+}
+
+.hero-editorial__title-wrap {
+  width: 100%;
+  margin-top: 10px;
+  /* Compact top margin to fit perfectly in single page view */
+  margin-bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.hero-editorial__title {
+  font-family: 'Panchang', sans-serif;
+  font-size: clamp(1.5rem, 7.5vw, 10rem);
+  font-weight: 600;
+  line-height: 0.82;
+  letter-spacing: 0;
+  /* Zero letter-spacing ensures no phantom trailing space after the last letter */
+  color: var(--clr-text);
+  margin: 0;
+  white-space: nowrap;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* 2-Column Content Section */
+.hero-editorial__content {
+  display: grid;
+  grid-template-columns: 1fr 2.2fr;
+  gap: var(--space-8);
+  align-items: center;
+  flex: 1;
+  min-height: 0;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  margin-top: -20px;
+  /* Pulls images up to overlap the bottom of M-COLLECTION perfectly */
+}
+
+/* Left Column: Editorial Info */
+.hero-editorial__info-col {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 360px;
+  padding-bottom: 0;
+}
+
+.hero-editorial__block {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.hero-editorial__sub-title {
+  font-family: 'Times New Roman', Georgia, serif;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--clr-text);
+  letter-spacing: 0.02em;
+  margin: 0;
+}
+
+.hero-editorial__desc {
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  color: var(--clr-text-muted);
+  line-height: 1.4;
+  margin: 0;
+}
+
+/* Right Column: Floating Tilted Image Cards */
+.hero-editorial__visual-col {
+  width: 100%;
+  height: 280px;
+  /* Reduced to ensure the entire hero fits perfectly in a single 100vh page view */
+  position: relative;
+}
+
+.hero-editorial__card-wrapper {
+  position: absolute;
+  transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1), z-index 0.5s ease;
+  cursor: pointer;
+}
+
+.hero-editorial__card-wrapper:hover {
+  z-index: 40 !important;
+}
+
+.hero-editorial__card {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  background: var(--clr-surface-2);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+  transition: box-shadow 0.5s ease;
+}
+
+.hero-editorial__card-wrapper:hover .hero-editorial__card {
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
+}
+
+.hero-editorial__card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Exact Uploaded Image Match Positions & Smaller Rotated Cards */
+.hero-editorial__card-wrapper--1 {
+  width: clamp(120px, 12vw, 170px);
+  /* Made even smaller as requested */
+  aspect-ratio: 3 / 4;
+  left: 20%;
+  /* Moved right to overlap Card 2 perfectly */
+  top: 5px;
+  z-index: 2;
+  transform: rotate(-12deg);
+}
+
+.hero-editorial__card-wrapper--2 {
+  width: clamp(135px, 13.5vw, 190px);
+  /* Made even smaller as requested */
+  aspect-ratio: 3 / 4;
+  left: 35%;
+  /* Positioned so Card 1 overlaps its left and Card 3 overlaps its right */
+  top: 35px;
+  z-index: 1;
+  transform: rotate(6deg);
+}
+
+.hero-editorial__card-wrapper--3 {
+  width: clamp(150px, 15vw, 210px);
+  /* Made even smaller as requested */
+  aspect-ratio: 3 / 4;
+  right: 26%;
+  /* Brought closer to the center/2nd image */
+  top: -20px;
+  z-index: 3;
+  transform: rotate(-2deg);
+}
+
+.hero-editorial__card-wrapper--1:hover {
+  transform: translateY(-12px) scale(1.04) rotate(-8deg);
+}
+
+.hero-editorial__card-wrapper--2:hover {
+  transform: translateY(-12px) scale(1.04) rotate(4deg);
+}
+
+.hero-editorial__card-wrapper--3:hover {
+  transform: translateY(-12px) scale(1.04) rotate(0deg);
+}
+
+/* Badge & Overlay Text */
+.hero-editorial__badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: #111111;
+  color: #ffffff;
+  font-family: var(--font-outfit), sans-serif;
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 20px;
+  z-index: 10;
+  letter-spacing: 0.05em;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+}
+
+.hero-editorial__card-text-overlay {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  text-align: left;
+  background: rgba(0, 0, 0, 0.4);
+  padding: 10px 14px;
+  border-radius: 8px;
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.card-text-item {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.card-text-title {
+  font-family: var(--font-outfit), sans-serif;
+  font-size: 0.65rem;
+  font-weight: 800;
+  color: #ffffff;
+  margin: 0;
+  letter-spacing: 0.1em;
+}
+
+.card-text-sub {
+  font-family: var(--font-body), sans-serif;
+  font-size: 0.65rem;
+  color: rgba(255, 255, 255, 0.85);
+  margin: 0;
+}
+
+/* Bottom Bar */
+.hero-editorial__bottom-bar {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 10px;
+  padding-bottom: 25px;
+  margin-bottom: 10px;
+  flex-shrink: 0;
+}
+
+.hero-editorial__bottom-left {
+  font-family: 'Times New Roman', Georgia, serif;
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--clr-text);
+  letter-spacing: 0.02em;
+}
+
+.hero-editorial__bottom-right {
+  font-family: 'Times New Roman', Georgia, serif;
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--clr-text);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  letter-spacing: 0.02em;
+  transition: opacity var(--transition-fast);
+}
+
+.hero-editorial__bottom-right:hover {
+  opacity: 0.7;
+}
+
+/* ─── Features Minimalist ─── */
+.features-minimal {
+  padding: var(--space-12) 0;
+  background: var(--clr-surface-2);
+  border-bottom: 1px solid var(--clr-border);
+}
+
+.features-minimal__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-8);
+}
+
+.feature-minimal-item {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.feature-minimal-item__icon {
+  width: 48px;
+  height: 48px;
+  background: var(--clr-surface);
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--clr-primary);
+  margin-bottom: var(--space-4);
+  box-shadow: var(--shadow-sm);
+}
+
+.feature-minimal-item__title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--clr-text);
+  margin-bottom: 6px;
+}
+
+.feature-minimal-item__desc {
+  font-size: 0.85rem;
+  color: var(--clr-text-muted);
+  line-height: 1.6;
+}
+
+/* ─── Section Header ─── */
+.section-header {
+  margin-bottom: var(--space-10);
+}
+
+.section-header--row {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+}
+
+.wrogn-curated-subtitle {
+  font-size: 1rem;
+  color: var(--clr-text-muted);
+  margin-top: 6px;
+  letter-spacing: 0.02em;
+}
+
+/* ─── Categories Minimalist ─── */
+.categories-minimal {
+  padding: var(--space-20) 0;
+}
+
+.categories-minimal__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-6);
+}
+
+.category-minimal-card__inner {
+  display: flex;
+  flex-direction: column;
+  background: var(--clr-surface);
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-8);
+  transition: all var(--transition-base);
+  height: 100%;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+}
+
+.category-minimal-card:hover .category-minimal-card__inner {
+  border-color: var(--clr-primary);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+  transform: translateY(-4px);
+}
+
+.category-minimal-card__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-6);
+}
+
+.category-minimal-card__tag {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--clr-text-muted);
+  background: var(--clr-surface-2);
+  padding: 4px 12px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--clr-border);
+}
+
+.category-minimal-card__arrow {
+  font-size: 1.2rem;
+  color: var(--clr-text-muted);
+  transition: all var(--transition-fast);
+}
+
+.category-minimal-card:hover .category-minimal-card__arrow {
+  color: var(--clr-primary);
+  transform: translateX(4px);
+}
+
+.category-minimal-card__name {
+  font-family: var(--font-display);
+  font-size: 2.2rem;
+  letter-spacing: 0.02em;
+  color: var(--clr-text);
+  margin-bottom: 8px;
+  line-height: 1.1;
+}
+
+.category-minimal-card__desc {
+  font-size: 0.9rem;
+  color: var(--clr-text-muted);
+  line-height: 1.6;
+}
+
+/* ─── Products Section ─── */
+.products-section {
+  padding: var(--space-20) 0;
+}
+
+/* ─── Elegant Promo Banner ─── */
+.promo-minimal {
+  padding: var(--space-12) 0;
+}
+
+.promo-minimal__inner {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  background: var(--clr-surface-2);
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+}
+
+.promo-minimal__content {
+  padding: var(--space-16);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.promo-minimal__title {
+  font-family: var(--font-display);
+  font-size: clamp(2.8rem, 6vw, 5.5rem);
+  color: var(--clr-text);
+  line-height: 1;
+  margin-bottom: var(--space-6);
+  letter-spacing: 0.02em;
+}
+
+.promo-minimal__sub {
+  color: var(--clr-text-muted);
+  margin-bottom: var(--space-8);
+  font-size: 1.1rem;
+  line-height: 1.7;
+  max-width: 520px;
+}
+
+.promo-minimal__visual {
+  width: 100%;
+  height: 100%;
+  min-height: 400px;
+  overflow: hidden;
+}
+
+.promo-minimal__visual img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ─── Brand Strip Minimal ─── */
+.brand-strip-minimal {
+  padding: var(--space-12) 0;
+  text-align: center;
+  border-top: 1px solid var(--clr-border);
+  background: var(--clr-surface-2);
+}
+
+.brand-strip-minimal__text {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 3vw, 2.5rem);
+  letter-spacing: 0.1em;
+  color: var(--clr-text-muted);
+}
+
+/* ─── Responsive ─── */
+@media (max-width: 1024px) {
+  .hero-editorial__content {
+    grid-template-columns: 1fr;
+    gap: var(--space-10);
+    align-items: center;
+  }
+
+  .hero-editorial__visual-col {
+    justify-content: center;
+  }
+
+  .hero-editorial__info-col {
+    max-width: 100%;
+    text-align: center;
+  }
+
+  .features-minimal__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .categories-minimal__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .promo-minimal__inner {
+    grid-template-columns: 1fr;
+  }
+
+  .promo-minimal__visual {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-editorial__visual-col {
+    display: flex;
+    gap: 16px;
+    padding: 16px 0;
+    overflow-x: auto;
+    width: 100%;
+    height: auto;
+    justify-content: flex-start;
+  }
+
+  .hero-editorial__card-wrapper {
+    position: relative !important;
+    width: 260px;
+    left: auto !important;
+    top: auto !important;
+    right: auto !important;
+    margin: 0 !important;
+    transform: none !important;
+  }
+
+  .hero-editorial__card {
+    width: 100%;
+    aspect-ratio: 3 / 4;
+  }
+
+  .categories-minimal__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .promo-minimal__content {
+    padding: var(--space-8);
+    text-align: center;
+    align-items: center;
+  }
+
+  .section-header--row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 480px) {
+  .features-minimal__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-editorial__bottom-bar {
+    flex-direction: column;
+    gap: 12px;
+    align-items: flex-start;
+  }
+}
