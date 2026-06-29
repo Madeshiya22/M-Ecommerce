@@ -50,6 +50,23 @@ const orderSchema = new mongoose.Schema(
     notes: { type: String, default: '' },
     deliveredAt: Date,
     paidAt: Date,
+    // Shipping & tracking
+    trackingNumber: { type: String, default: '' },
+    trackingUrl: { type: String, default: '' },
+    carrier: { type: String, default: '' },
+    estimatedDelivery: Date,
+    // Refund management
+    refundStatus: {
+      type: String,
+      enum: ['none', 'requested', 'processing', 'completed', 'rejected'],
+      default: 'none',
+    },
+    refundAmount: { type: Number, default: 0 },
+    refundReason: { type: String, default: '' },
+    refundProcessedAt: Date,
+    // Coupon applied
+    couponCode: { type: String, default: '' },
+    couponDiscount: { type: Number, default: 0 },
   },
   { timestamps: true }
 );

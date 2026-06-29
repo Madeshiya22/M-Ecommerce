@@ -32,7 +32,7 @@ export default function Footer() {
         {/* Brand */}
         <div className="footer__brand">
           <div className="footer__logo">
-            <span>M</span> <span style={{ marginLeft: 6 }}>COLLECTION</span>
+            <span style={{ color: '#8B5A2B' }}>M</span> <span style={{ marginLeft: 6 }}>COLLECTION</span>
           </div>
           <p className="footer__tagline">
             Premium streetwear meets elevated fashion. T-shirts and shirts crafted for those who live boldly.
@@ -85,7 +85,7 @@ export default function Footer() {
       </div>
 
       <div className="footer__bottom container">
-        <p>© 2026 M-Collection. All rights reserved.</p>
+        <p>© 2026 <span style={{ color: '#8B5A2B' }}>M</span>-Collection. All rights reserved.</p>
         <div className="footer__bottom-links">
           <Link to="/privacy">Privacy Policy</Link>
           <Link to="/terms">Terms & Conditions</Link>

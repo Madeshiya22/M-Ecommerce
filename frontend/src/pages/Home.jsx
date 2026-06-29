@@ -17,6 +17,10 @@ import casualShirtImg from '../assets/casual_shirt.png';
 import formalShirtImg from '../assets/formal_shirt.png';
 import denimShirtImg from '../assets/denim_shirt.png';
 import poloTshirtImg from '../assets/polo_T-shirt.png';
+import modelImg1 from '../assets/model/image1.png';
+import modelImg2 from '../assets/model/image2.png';
+import modelImg3 from '../assets/model/image3.png';
+import modelImg4 from '../assets/model/image4.png';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -260,7 +264,25 @@ export default function Home() {
       {/* ── Brand Strip ── */}
       <section className="brand-strip-minimal gsap-fade-up">
         <div className="container">
-          <p className="brand-strip-minimal__text">M-COLLECTION — PURE ELEGANCE, UNCOMPROMISED QUALITY.</p>
+          <p className="brand-strip-minimal__text"><span style={{ color: '#8B5A2B' }}>M</span>-COLLECTION — PURE ELEGANCE, UNCOMPROMISED QUALITY.</p>
+        </div>
+      </section>
+
+      {/* ── Model Gallery ── */}
+      <section className="model-gallery-section">
+        <div className="model-gallery-grid">
+          <div className="model-gallery-item">
+            <img src={modelImg2} alt="Model 2" className="model-gallery-img" />
+          </div>
+          <div className="model-gallery-item">
+            <img src={modelImg4} alt="Model 4" className="model-gallery-img" />
+          </div>
+          <div className="model-gallery-item">
+            <img src={modelImg3} alt="Model 3" className="model-gallery-img" />
+          </div>
+          <div className="model-gallery-item">
+            <img src={modelImg1} alt="Model 1" className="model-gallery-img" style={{ objectPosition: 'top center' }} />
+          </div>
         </div>
       </section>
     </main>

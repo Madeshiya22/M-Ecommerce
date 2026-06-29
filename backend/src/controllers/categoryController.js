@@ -86,3 +86,43 @@ const deleteCategory = asyncHandler(async (req, res) => {
 });
 
 module.exports = { getCategories, getCategoryById, createCategory, updateCategory, deleteCategory };
+
+// @desc   Bulk reorder categories (Admin)
+// @route  PUT /api/categories/reorder
+// @access Private/Admin
+const reorderCategories = asyncHandler(async (req, res) => {
+  const { orders } = req.body; // [{ id, sortOrder }]
+  if (!orders || !Array.isArray(orders)) {
+    res.status(400);
+    throw new Error('Orders array is required');
+  }
+
+  const bulkOps = orders.map(({ id, sortOrder }) => ({
+    updateOne: { filter: { _id: id }, update: { sortOrder: Number(sortOrder) } },
+  }));
+
+  await Category.bulkWrite(bulkOps);
+  res.json({ success: true, message: 'Categories reordered' });
+});
+
+// @desc   Get categories with hierarchy (parent → children)
+// @route  GET /api/categories/tree
+// @access Public
+const getCategoryTree = asyncHandler(async (req, res) => {
+  const { type } = req.query;
+  const filter = { isActive: true };
+  if (type) filter.type = type;
+
+  const allCategories = await Category.find(filter).sort({ sortOrder: 1 });
+
+  // Build tree: root categories with their children
+  const roots = allCategories.filter((c) => !c.parentCategory);
+  const tree = roots.map((root) => ({
+    ...root.toObject(),
+    children: allCategories.filter((c) => c.parentCategory?.toString() === root._id.toString()),
+  }));
+
+  res.json({ success: true, data: tree });
+});
+
+module.exports = Object.assign(module.exports, { reorderCategories, getCategoryTree });

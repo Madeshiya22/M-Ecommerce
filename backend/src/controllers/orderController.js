@@ -167,3 +167,126 @@ const getOrderStats = asyncHandler(async (req, res) => {
 });
 
 module.exports = { createOrder, getMyOrders, getOrderById, getAllOrders, updateOrderStatus, getOrderStats };
+
+// @desc   Update shipping/tracking info (Admin)
+// @route  PUT /api/orders/:id/tracking
+// @access Private/Admin
+const updateOrderTracking = asyncHandler(async (req, res) => {
+  const { trackingNumber, trackingUrl, carrier, estimatedDelivery } = req.body;
+  const order = await Order.findById(req.params.id);
+  if (!order) {
+    res.status(404);
+    throw new Error('Order not found');
+  }
+  if (trackingNumber !== undefined) order.trackingNumber = trackingNumber;
+  if (trackingUrl !== undefined) order.trackingUrl = trackingUrl;
+  if (carrier !== undefined) order.carrier = carrier;
+  if (estimatedDelivery !== undefined) order.estimatedDelivery = estimatedDelivery;
+
+  order.statusHistory.push({ status: order.status, note: `Tracking updated: ${carrier || ''} ${trackingNumber || ''}`.trim() });
+  await order.save();
+  res.json({ success: true, data: order });
+});
+
+// @desc   Process refund (Admin)
+// @route  PUT /api/orders/:id/refund
+// @access Private/Admin
+const processRefund = asyncHandler(async (req, res) => {
+  const { refundStatus, refundAmount, refundReason } = req.body;
+  const order = await Order.findById(req.params.id);
+  if (!order) {
+    res.status(404);
+    throw new Error('Order not found');
+  }
+
+  const validStatuses = ['requested', 'processing', 'completed', 'rejected'];
+  if (!validStatuses.includes(refundStatus)) {
+    res.status(400);
+    throw new Error('Invalid refund status');
+  }
+
+  order.refundStatus = refundStatus;
+  if (refundAmount !== undefined) order.refundAmount = Number(refundAmount);
+  if (refundReason !== undefined) order.refundReason = refundReason;
+  if (refundStatus === 'completed') {
+    order.refundProcessedAt = Date.now();
+    order.paymentStatus = 'refunded';
+  }
+
+  order.statusHistory.push({ status: order.status, note: `Refund ${refundStatus}: ₹${order.refundAmount}` });
+  await order.save();
+  res.json({ success: true, data: order });
+});
+
+// @desc   Get sales analytics (Admin)
+// @route  GET /api/admin/orders/analytics
+// @access Private/Admin
+const getSalesAnalytics = asyncHandler(async (req, res) => {
+  const { period = '12' } = req.query; // months
+  const months = Math.min(24, parseInt(period));
+
+  const startDate = new Date();
+  startDate.setMonth(startDate.getMonth() - months);
+
+  const [monthlyRevenue, ordersByStatus, topProducts, dailyOrders] = await Promise.all([
+    Order.aggregate([
+      { $match: { createdAt: { $gte: startDate } } },
+      {
+        $group: {
+          _id: { year: { $year: '$createdAt' }, month: { $month: '$createdAt' } },
+          revenue: { $sum: '$totalPrice' },
+          orders: { $sum: 1 },
+          avgOrder: { $avg: '$totalPrice' },
+        },
+      },
+      { $sort: { '_id.year': 1, '_id.month': 1 } },
+    ]),
+    Order.aggregate([
+      { $group: { _id: '$status', count: { $sum: 1 } } },
+    ]),
+    Order.aggregate([
+      { $match: { createdAt: { $gte: startDate } } },
+      { $unwind: '$items' },
+      {
+        $group: {
+          _id: '$items.product',
+          totalSold: { $sum: '$items.qty' },
+          totalRevenue: { $sum: { $multiply: ['$items.price', '$items.qty'] } },
+          name: { $first: '$items.name' },
+        },
+      },
+      { $sort: { totalSold: -1 } },
+      { $limit: 10 },
+    ]),
+    Order.aggregate([
+      {
+        $match: {
+          createdAt: { $gte: new Date(new Date().setDate(new Date().getDate() - 30)) },
+        },
+      },
+      {
+        $group: {
+          _id: { $dateToString: { format: '%Y-%m-%d', date: '$createdAt' } },
+          orders: { $sum: 1 },
+          revenue: { $sum: '$totalPrice' },
+        },
+      },
+      { $sort: { _id: 1 } },
+    ]),
+  ]);
+
+  res.json({
+    success: true,
+    data: {
+      monthlyRevenue,
+      ordersByStatus: ordersByStatus.reduce((acc, s) => { acc[s._id] = s.count; return acc; }, {}),
+      topProducts,
+      dailyOrders,
+    },
+  });
+});
+
+// Re-export everything including new functions
+module.exports = Object.assign(module.exports, {
+  updateOrderTracking, processRefund, getSalesAnalytics,
+});

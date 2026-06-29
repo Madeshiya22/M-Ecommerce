@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { logout } from '../../redux/slices/authSlice';
 import { toggleTheme } from '../../redux/slices/themeSlice';
 import { toggleCart } from '../../redux/slices/cartSlice';
+import { FiUser } from 'react-icons/fi';
+import ProfileDrawer from '../ProfileDrawer/ProfileDrawer';
 import './Navbar.css';
 
 const Navbar = () => {
@@ -11,6 +12,7 @@ const Navbar = () => {
   const navigate = useNavigate();
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
+  const [isProfileOpen, setIsProfileOpen] = useState(false);
 
   const authState = useSelector((state) => state.auth || {});
   const user = authState.user;
@@ -26,11 +28,6 @@ const Navbar = () => {
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme);
   }, [theme]);
-
-  const handleLogout = () => {
-    dispatch(logout());
-    navigate('/');
-  };
 
   const handleSearchSubmit = (e) => {
     e.preventDefault();
@@ -139,14 +136,14 @@ const Navbar = () => {
           </button>
 
           {user ? (
-            <div className="navbar__user">
-              <Link to="/profile" className="navbar__link navbar__link--user">
-                {user.name}
-              </Link>
-              <button className="navbar__auth-btn" onClick={handleLogout}>
-                Logout
-              </button>
-            </div>
+            <button
+              className="navbar__action-btn navbar__profile-btn"
+              onClick={() => setIsProfileOpen(true)}
+              title="Profile"
+              aria-label="Profile"
+            >
+              <FiUser size={20} />
+            </button>
           ) : (
             <Link to="/login" className="navbar__auth-btn">
               Login
@@ -154,6 +151,12 @@ const Navbar = () => {
           )}
         </div>
       </div>
+
+      {/* Profile Drawer */}
+      <ProfileDrawer 
+        isOpen={isProfileOpen} 
+        onClose={() => setIsProfileOpen(false)} 
+      />
     </header>
   );
 };

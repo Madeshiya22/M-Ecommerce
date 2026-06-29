@@ -209,4 +209,136 @@ const deleteProductImage = asyncHandler(async (req, res) => {
   res.json({ success: true, data: product });
 });
 
-module.exports = { getProducts, getProductById, getProductBySlug, createProduct, updateProduct, deleteProduct, addReview, deleteProductImage };
+// @desc   Get product statistics (Admin)
+// @route  GET /api/admin/products/stats
+// @access Private/Admin
+const getProductStats = asyncHandler(async (req, res) => {
+  const [totalProducts, activeProducts, draftProducts, outOfStock, lowStock, featuredProducts, newArrivals, bestSellers] = await Promise.all([
+    Product.countDocuments(),
+    Product.countDocuments({ isActive: true, status: { $ne: 'draft' } }),
+    Product.countDocuments({ status: 'draft' }),
+    Product.countDocuments({ stock: 0 }),
+    Product.countDocuments({ stock: { $gt: 0, $lte: 10 } }),
+    Product.countDocuments({ isFeatured: true }),
+    Product.countDocuments({ isNewArrival: true }),
+    Product.countDocuments({ isBestSeller: true }),
+  ]);
+
+  const byType = await Product.aggregate([
+    { $group: { _id: '$type', count: { $sum: 1 } } },
+  ]);
+
+  const topRated = await Product.find({ numReviews: { $gt: 0 } })
+    .sort({ rating: -1 })
+    .limit(5)
+    .select('name rating numReviews images price discountPrice');
+
+  res.json({
+    success: true,
+    data: {
+      totalProducts, activeProducts, draftProducts, outOfStock, lowStock,
+      featuredProducts, newArrivals, bestSellers,
+      byType: byType.reduce((acc, t) => { acc[t._id] = t.count; return acc; }, {}),
+      topRated,
+    },
+  });
+});
+
+// @desc   Get low stock products (Admin)
+// @route  GET /api/admin/products/low-stock
+// @access Private/Admin
+const getLowStockProducts = asyncHandler(async (req, res) => {
+  const threshold = parseInt(req.query.threshold) || 10;
+  const products = await Product.find({ stock: { $gt: 0, $lte: threshold }, isActive: true })
+    .populate('category', 'name')
+    .sort({ stock: 1 })
+    .select('name sku stock images price category type');
+  res.json({ success: true, count: products.length, data: products });
+});
+
+// @desc   Bulk update products (Admin)
+// @route  PUT /api/admin/products/bulk
+// @access Private/Admin
+const bulkUpdateProducts = asyncHandler(async (req, res) => {
+  const { ids, updates } = req.body;
+  if (!ids || !Array.isArray(ids) || ids.length === 0) {
+    res.status(400);
+    throw new Error('Product IDs are required');
+  }
+  const allowed = ['isActive', 'isFeatured', 'isNewArrival', 'isBestSeller', 'status'];
+  const safeUpdates = Object.fromEntries(Object.entries(updates || {}).filter(([k]) => allowed.includes(k)));
+  if (Object.keys(safeUpdates).length === 0) {
+    res.status(400);
+    throw new Error('No valid update fields provided');
+  }
+  const result = await Product.updateMany({ _id: { $in: ids } }, safeUpdates);
+  res.json({ success: true, message: `${result.modifiedCount} products updated` });
+});
+
+// @desc   Bulk delete products (Admin)
+// @route  DELETE /api/admin/products/bulk
+// @access Private/Admin
+const bulkDeleteProducts = asyncHandler(async (req, res) => {
+  const { ids } = req.body;
+  if (!ids || !Array.isArray(ids) || ids.length === 0) {
+    res.status(400);
+    throw new Error('Product IDs are required');
+  }
+  const result = await Product.deleteMany({ _id: { $in: ids } });
+  res.json({ success: true, message: `${result.deletedCount} products deleted` });
+});
+
+// @desc   Export products as CSV (Admin)
+// @route  GET /api/admin/products/export
+// @access Private/Admin
+const exportProductsCSV = asyncHandler(async (req, res) => {
+  const { type, category } = req.query;
+  const filter = {};
+  if (type) filter.type = type;
+  if (category) filter.category = category;
+
+  const products = await Product.find(filter)
+    .populate('category', 'name')
+    .lean();
+
+  const headers = [
+    'Name', 'SKU', 'Type', 'Category', 'Brand', 'Price', 'Discount Price',
+    'Stock', 'Fabric', 'Fit', 'Pattern', 'Gender', 'Sizes',
+    'Featured', 'New Arrival', 'Best Seller', 'Status', 'Rating', 'Sold Count',
+  ];
+
+  const rows = products.map((p) => [
+    `"${(p.name || '').replace(/"/g, '""')}"`,
+    p.sku || '',
+    p.type || '',
+    `"${(p.category?.name || '').replace(/"/g, '""')}"`,
+    p.brand || '',
+    p.price || 0,
+    p.discountPrice || 0,
+    p.stock || 0,
+    p.fabric || '',
+    p.fit || '',
+    p.pattern || '',
+    p.gender || '',
+    `"${(p.sizes || []).join(', ')}"`,
+    p.isFeatured ? 'Yes' : 'No',
+    p.isNewArrival ? 'Yes' : 'No',
+    p.isBestSeller ? 'Yes' : 'No',
+    p.status || 'published',
+    p.rating || 0,
+    p.soldCount || 0,
+  ]);
+
+  const csv = [headers.join(','), ...rows.map((r) => r.join(','))].join('\n');
+  res.setHeader('Content-Type', 'text/csv');
+  res.setHeader('Content-Disposition', 'attachment; filename="products.csv"');
+  res.send(csv);
+});
+
+module.exports = {
+  getProducts, getProductById, getProductBySlug,
+  createProduct, updateProduct, deleteProduct,
+  addReview, deleteProductImage,
+  getProductStats, getLowStockProducts,
+  bulkUpdateProducts, bulkDeleteProducts, exportProductsCSV,
+};

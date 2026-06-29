@@ -31,8 +31,14 @@ export default function AdminLayout() {
 
   return (
     <div className="admin-layout">
+      {/* Mobile Overlay */}
+      <div 
+        className={`admin-sidebar-overlay ${sidebarOpen ? 'mobile-open' : ''}`}
+        onClick={() => setSidebarOpen(false)}
+      />
+
       {/* Sidebar */}
-      <aside className={`admin-sidebar ${sidebarOpen ? '' : 'admin-sidebar--collapsed'}`}>
+      <aside className={`admin-sidebar ${sidebarOpen ? 'mobile-open' : 'admin-sidebar--collapsed'}`}>
         <div className="admin-sidebar__header">
           <Link to="/" className="admin-logo">
             <span className="admin-logo__m">M</span>
@@ -78,7 +84,15 @@ export default function AdminLayout() {
       {/* Main */}
       <main className="admin-main">
         <div className="admin-topbar">
-          <div className="admin-topbar__breadcrumb">Admin Panel</div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+            <button 
+              className="admin-icon-btn d-md-none" 
+              onClick={() => setSidebarOpen(true)}
+            >
+              <FiMenu size={20} />
+            </button>
+            <div className="admin-topbar__breadcrumb">Admin Panel</div>
+          </div>
           <div className="admin-topbar__right">
             <span className="badge badge-success">● Live</span>
           </div>

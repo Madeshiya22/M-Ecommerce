@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
+import { useGoogleLogin } from '@react-oauth/google';
 import { 
   FiMail, FiLock, FiUser, FiEye, FiEyeOff, 
   FiUserPlus, FiPhone 
@@ -22,6 +23,7 @@ export default function Register() {
   const [showPass, setShowPass] = useState(false);
   const [showConfPass, setShowConfPass] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [googleLoading, setGoogleLoading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -43,6 +45,24 @@ export default function Register() {
       setLoading(false);
     }
   };
+
+  const googleSignup = useGoogleLogin({
+    onSuccess: async (tokenResponse) => {
+      setGoogleLoading(true);
+      try {
+        const res = await authService.googleLogin(tokenResponse.access_token);
+        const { token, ...user } = res.data.data;
+        dispatch(loginSuccess({ user, token }));
+        toast.success(`Welcome, ${user.name}! 🎉`);
+        navigate('/');
+      } catch (err) {
+        toast.error(err.response?.data?.message || 'Google sign-up failed');
+      } finally {
+        setGoogleLoading(false);
+      }
+    },
+    onError: () => toast.error('Google sign-in was cancelled or failed'),
+  });
 
   return (
     <div className="auth-page">
@@ -168,8 +188,8 @@ export default function Register() {
           </div>
           
           <div className="auth-social-wrap">
-            <button className="auth-btn-social" type="button" onClick={() => toast('Google auth coming soon!')}>
-              <FaGoogle color="#DB4437" /> Sign up with Google
+            <button className="auth-btn-social" type="button" onClick={() => googleSignup()} disabled={googleLoading}>
+              <FaGoogle color="#DB4437" /> {googleLoading ? 'Connecting...' : 'Sign up with Google'}
             </button>
             <button className="auth-btn-social" type="button" onClick={() => toast('Facebook auth coming soon!')}>
               <FaFacebookF color="#4267B2" /> Sign up with Facebook

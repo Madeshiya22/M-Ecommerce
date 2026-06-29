@@ -104,3 +104,75 @@ const changePassword = asyncHandler(async (req, res) => {
 });
 
 module.exports = { register, login, getMe, updateMe, changePassword };
+
+// @desc   Google OAuth — verify access token, find/create user, return JWT
+// @route  POST /api/auth/google
+// @access Public
+const googleLogin = asyncHandler(async (req, res) => {
+  const { accessToken } = req.body;
+
+  if (!accessToken) {
+    res.status(400);
+    throw new Error('Google access token is required');
+  }
+
+  // Verify token with Google's userinfo endpoint
+  let googleUser;
+  try {
+    const response = await fetch(`https://www.googleapis.com/oauth2/v3/userinfo`, {
+      headers: { Authorization: `Bearer ${accessToken}` },
+    });
+    if (!response.ok) throw new Error('Invalid token');
+    googleUser = await response.json();
+  } catch {
+    res.status(401);
+    throw new Error('Google authentication failed — invalid token');
+  }
+
+  const { sub: googleId, email, name, picture } = googleUser;
+
+  if (!email) {
+    res.status(400);
+    throw new Error('Google account must have an email address');
+  }
+
+  // Find user by email or googleId; link if found, create if new
+  let user = await User.findOne({ $or: [{ email }, { googleId }] });
+
+  if (user) {
+    if (!user.isActive) {
+      res.status(401);
+      throw new Error('Account is deactivated. Contact support.');
+    }
+    // Link Google ID if not already linked
+    if (!user.googleId) {
+      user.googleId = googleId;
+      user.authProvider = 'google';
+      if (picture && !user.avatar) user.avatar = picture;
+      await user.save();
+    }
+  } else {
+    // Create new user (no password for Google accounts)
+    user = await User.create({
+      name,
+      email,
+      googleId,
+      avatar: picture || '',
+      authProvider: 'google',
+    });
+  }
+
+  res.json({
+    success: true,
+    data: {
+      _id: user._id,
+      name: user.name,
+      email: user.email,
+      role: user.role,
+      avatar: user.avatar,
+      token: generateToken(user._id),
+    },
+  });
+});
+
+module.exports = Object.assign(module.exports, { googleLogin });
