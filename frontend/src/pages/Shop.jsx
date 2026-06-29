@@ -29,6 +29,9 @@ export default function Shop() {
   const keyword = searchParams.get('keyword') || '';
   const newArrival = searchParams.get('newArrival') || '';
   const featured = searchParams.get('featured') || '';
+  const fit = searchParams.get('fit') || '';
+  const pattern = searchParams.get('pattern') || '';
+  const fabric = searchParams.get('fabric') || '';
 
   // Fetch categories
   const { data: categoriesData } = useQuery({
@@ -39,7 +42,7 @@ export default function Shop() {
 
   // Fetch products
   const { data: productsData, isLoading, isFetching } = useQuery({
-    queryKey: ['products', { type, keyword, selectedCategory, selectedSizes, priceRange, sort, page, newArrival, featured }],
+    queryKey: ['products', { type, keyword, selectedCategory, selectedSizes, priceRange, sort, page, newArrival, featured, fit, pattern, fabric }],
     queryFn: () =>
       productService.getAll({
         type: type || undefined,
@@ -53,6 +56,9 @@ export default function Shop() {
         limit: 12,
         newArrival: newArrival || undefined,
         featured: featured || undefined,
+        fit: fit || undefined,
+        pattern: pattern || undefined,
+        fabric: fabric || undefined,
       }),
     select: (res) => res.data,
     keepPreviousData: true,

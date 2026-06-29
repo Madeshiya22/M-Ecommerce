@@ -65,25 +65,25 @@ const Navbar = () => {
             <span className="text-brown">M</span>-Collection
           </Link>
           <div className="navbar__dropdown">
-            <Link to="/products?category=tshirt" className="navbar__link">
+            <Link to="/products?type=tshirt" className="navbar__link">
               T-Shirts
             </Link>
             <div className="navbar__dropdown-menu">
-              <Link to="/products?category=tshirt&style=oversized" className="navbar__dropdown-item">Oversized</Link>
-              <Link to="/products?category=tshirt&style=polo" className="navbar__dropdown-item">Polo</Link>
-              <Link to="/products?category=tshirt&style=printed" className="navbar__dropdown-item">Printed</Link>
-              <Link to="/products?category=tshirt&style=plain" className="navbar__dropdown-item">Plain</Link>
+              <Link to="/products?type=tshirt&fit=oversized" className="navbar__dropdown-item">Oversized</Link>
+              <Link to="/products?type=tshirt&pattern=polo" className="navbar__dropdown-item">Polo</Link>
+              <Link to="/products?type=tshirt&pattern=printed" className="navbar__dropdown-item">Printed</Link>
+              <Link to="/products?type=tshirt&pattern=solid" className="navbar__dropdown-item">Plain</Link>
             </div>
           </div>
           <div className="navbar__dropdown">
-            <Link to="/products?category=shirt" className="navbar__link">
+            <Link to="/products?type=shirt" className="navbar__link">
               Shirts
             </Link>
             <div className="navbar__dropdown-menu">
-              <Link to="/products?category=shirt&style=casual" className="navbar__dropdown-item">Casual</Link>
-              <Link to="/products?category=shirt&style=formal" className="navbar__dropdown-item">Formal</Link>
-              <Link to="/products?category=shirt&style=printed" className="navbar__dropdown-item">Printed</Link>
-              <Link to="/products?category=shirt&style=denim" className="navbar__dropdown-item">Denim</Link>
+              <Link to="/products?type=shirt&fit=relaxed" className="navbar__dropdown-item">Casual</Link>
+              <Link to="/products?type=shirt&fit=slim" className="navbar__dropdown-item">Formal</Link>
+              <Link to="/products?type=shirt&pattern=printed" className="navbar__dropdown-item">Printed</Link>
+              <Link to="/products?type=shirt&fabric=denim" className="navbar__dropdown-item">Denim</Link>
             </div>
           </div>
           <Link to="/about" className="navbar__link">
