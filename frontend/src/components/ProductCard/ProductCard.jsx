@@ -34,78 +34,50 @@ export default function ProductCard({ product }) {
           <img src={imageUrl} alt={product.images?.[0]?.alt || product.name} loading="lazy" />
 
           {/* Product Tag */}
-          <div className="product-image-tag">
-            {product.isNewArrival ? 'NEW ARRIVAL' : product.isBestSeller ? 'BEST SELLER' : 'TRENDING'}
-          </div>
+          {(product.isNewArrival || product.isBestSeller) && (
+            <div className="product-image-tag">
+              {product.isNewArrival ? 'NEW ARRIVAL' : 'BEST SELLER'}
+            </div>
+          )}
 
           {/* Hover actions */}
           <div className="product-card__actions">
             <button className="product-card__action-btn" title="Wishlist" onClick={e => { e.preventDefault(); e.stopPropagation(); toast('Added to wishlist ♥'); }}>
               <FiHeart size={15} />
             </button>
-            <span className="product-card__action-btn" title="Quick View">
-              <FiEye size={15} />
-            </span>
           </div>
         </div>
 
         {/* Body */}
         <div className="product-card__body">
-          {/* Fabric & Fit Meta Chips */}
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 4, marginBottom: 8 }}>
-            <span className="meta-tag-chip">100% COTTON</span>
-            <span className="meta-tag-chip">{product.type === 'tshirt' ? 'OVERSIZED FIT' : 'RELAXED FIT'}</span>
+          <div className="product-card__title-row">
+            <h3 className="product-card__name">{product.name}</h3>
+            <button 
+              className="product-card__quick-add"
+              onClick={handleAddToCart}
+              disabled={product.stock === 0}
+              title="Add to Bag"
+            >
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
+              </svg>
+            </button>
           </div>
-
-          <p className="product-card__category">
-            {product.category?.name || product.type}
-          </p>
-          <h3 className="product-card__name">{product.name}</h3>
-
-          {/* Rating */}
-          {product.numReviews > 0 && (
-            <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 8 }}>
-              <div className="star-rating">
-                {[1,2,3,4,5].map(s => (
-                  <FiStar key={s} size={11} style={{ fill: s <= Math.round(product.rating) ? 'currentColor' : 'none' }} />
-                ))}
-              </div>
-              <span style={{ fontSize: '0.72rem', color: 'var(--clr-text-faint)' }}>({product.numReviews})</span>
-            </div>
-          )}
 
           {/* Price Block */}
           <div className="product-card__price">
             <span className="product-card__price-current">₹{price.toLocaleString('en-IN')}</span>
             {hasDiscount && (
-              <>
-                <span className="product-card__price-original">₹{product.price.toLocaleString('en-IN')}</span>
-                <span className="text-wrogn-green">({discount}% OFF)</span>
-              </>
+              <span className="product-card__price-original">₹{product.price.toLocaleString('en-IN')}</span>
             )}
           </div>
 
-          {/* Best Price Calculator Banner */}
-          <div className="best-price-bg">
-            <span className="best-price-text">
-              Best price <span style={{ fontWeight: 800 }}>₹{bestPrice.toLocaleString('en-IN')}</span>
-            </span>
+          {/* Best Price */}
+          <div className="product-card__best-price">
+            Best price ₹{bestPrice.toLocaleString('en-IN')}
           </div>
         </div>
       </Link>
-
-      {/* Add to cart button */}
-      <div style={{ padding: '0 16px 16px' }}>
-        <button
-          className="product-card__add-btn"
-          onClick={handleAddToCart}
-          disabled={product.stock === 0}
-        >
-          {product.stock === 0 ? 'Out of Stock' : (
-            <><FiShoppingBag size={14} /> Add to Bag</>
-          )}
-        </button>
-      </div>
     </motion.div>
   );
 }

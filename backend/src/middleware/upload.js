@@ -10,11 +10,31 @@ if (!fs.existsSync(uploadDir)) {
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
+    // Keep base uploadDir as destination so Multer creates WriteStream safely
     cb(null, uploadDir);
   },
   filename: (req, file, cb) => {
+    let subFolder = '';
+    const type = req.body.type ? req.body.type.toLowerCase() : '';
+    
+    if (type === 'tshirt' || type === 't-shirt') {
+      subFolder = 'T-shirt/';
+    } else if (type === 'shirt') {
+      subFolder = 'shirt/';
+    }
+    
+    if (subFolder) {
+      const fullSubDir = path.join(uploadDir, subFolder);
+      if (!fs.existsSync(fullSubDir)) {
+        fs.mkdirSync(fullSubDir, { recursive: true });
+      }
+    }
+    
     const uniqueSuffix = `${Date.now()}-${Math.round(Math.random() * 1e9)}`;
-    cb(null, `${file.fieldname}-${uniqueSuffix}${path.extname(file.originalname)}`);
+    const fileName = `${file.fieldname}-${uniqueSuffix}${path.extname(file.originalname)}`;
+    
+    // Prefix the subFolder so the relative path is returned in req.file.filename
+    cb(null, subFolder + fileName);
   },
 });
 

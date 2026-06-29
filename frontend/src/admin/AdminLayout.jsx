@@ -66,18 +66,24 @@ export default function AdminLayout() {
 
         <div className="admin-sidebar__footer">
           {sidebarOpen && (
-            <div className="admin-user">
-              <div className="admin-user__avatar">{user?.name?.[0]?.toUpperCase()}</div>
-              <div>
-                <p className="admin-user__name">{user?.name}</p>
-                <p className="admin-user__role">Administrator</p>
+            <>
+              <div className="admin-user-card">
+                <div className="admin-user-card__avatar">{user?.name?.[0]?.toUpperCase()}</div>
+                <div className="admin-user-card__info">
+                  <p className="admin-user-card__name">{user?.name}</p>
+                  <p className="admin-user-card__role">Administrator</p>
+                </div>
               </div>
-            </div>
+              <div className="admin-sidebar__footer-actions">
+                <Link to="/" target="_blank" className="admin-footer-btn" title="View Store">
+                  <FiExternalLink size={16} /> <span>Store</span>
+                </Link>
+                <button className="admin-footer-btn admin-footer-btn--danger" title="Logout" onClick={handleLogout}>
+                  <FiLogOut size={16} /> <span>Logout</span>
+                </button>
+              </div>
+            </>
           )}
-          <div className="admin-sidebar__footer-actions">
-            <Link to="/" target="_blank" className="admin-icon-btn" title="View Store"><FiExternalLink size={16} /></Link>
-            <button className="admin-icon-btn admin-icon-btn--danger" title="Logout" onClick={handleLogout}><FiLogOut size={16} /></button>
-          </div>
         </div>
       </aside>
 
@@ -85,12 +91,14 @@ export default function AdminLayout() {
       <main className="admin-main">
         <div className="admin-topbar">
           <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-            <button 
-              className="admin-icon-btn d-md-none" 
-              onClick={() => setSidebarOpen(true)}
-            >
-              <FiMenu size={20} />
-            </button>
+            {!sidebarOpen && (
+              <button 
+                className="admin-icon-btn" 
+                onClick={() => setSidebarOpen(true)}
+              >
+                <FiMenu size={20} />
+              </button>
+            )}
             <div className="admin-topbar__breadcrumb">Admin Panel</div>
           </div>
           <div className="admin-topbar__right">
