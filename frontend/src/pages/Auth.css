@@ -63,7 +63,7 @@
   letter-spacing: 0.1em;
   font-weight: 700;
   color: #fff;
-  border-bottom: 2px solid #c48c5a;
+  border-bottom: 2px solid var(--clr-gold, #c48c5a);
   padding-bottom: 15px;
   margin-bottom: 15px;
 }
@@ -201,7 +201,7 @@
 .auth-input {
   width: 100%;
   height: 46px;
-  border: 1px solid #e5e7eb;
+  border: 1px solid var(--clr-border);
   border-radius: 8px;
   padding: 0 40px;
   font-size: 0.95rem;
@@ -286,7 +286,7 @@
 .auth-divider::after {
   content: '';
   flex: 1;
-  border-bottom: 1px solid #e5e7eb;
+  border-bottom: 1px solid var(--clr-border);
 }
 
 .auth-divider span {
@@ -304,7 +304,7 @@
 .auth-btn-social {
   height: 46px;
   background: #fff;
-  border: 1px solid #e5e7eb;
+  border: 1px solid var(--clr-border);
   border-radius: 8px;
   display: flex;
   align-items: center;

@@ -144,8 +144,8 @@ body {
   border-radius: var(--radius-full);
   text-decoration: none;
   cursor: pointer;
+  border: 1px solid transparent;
   transition: all var(--transition-base);
-  border: none;
   outline: none;
   letter-spacing: 0.02em;
 }
