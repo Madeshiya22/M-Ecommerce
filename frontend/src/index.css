@@ -301,8 +301,8 @@ h1, h2, h3, h4, h5, h6 {
   position: absolute;
   bottom: 12px;
   left: 12px;
-  background: rgba(255, 255, 255, 0.95);
-  color: #000;
+  background: var(--clr-surface);
+  color: var(--clr-text);
   font-size: 0.6rem;
   font-weight: 700;
   padding: 3px 8px;
@@ -347,8 +347,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .product-card__action-btn:hover {
-  background: #000;
-  color: #fff;
+  background: var(--clr-primary);
+  color: var(--clr-surface);
   transform: scale(1.1);
 }
 
