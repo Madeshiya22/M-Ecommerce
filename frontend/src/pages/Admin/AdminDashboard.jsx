@@ -112,7 +112,7 @@ export default function AdminDashboard() {
                   <td>
                     <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
                       <div style={{ width: 36, height: 44, background: 'var(--clr-surface-2)', borderRadius: 6, overflow: 'hidden', flexShrink: 0 }}>
-                        {p.images?.[0]?.url && <img src={`http://localhost:5000${p.images[0].url}`} alt={p.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />}
+                        {p.images?.[0]?.url && <img src={`${import.meta.env.VITE_BACKEND_URL || (import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000')}${p.images[0].url}`} alt={p.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />}
                       </div>
                       <span style={{ fontSize: '0.82rem', fontWeight: 600, display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>{p.name}</span>
                     </div>

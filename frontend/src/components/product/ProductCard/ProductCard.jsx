@@ -6,7 +6,7 @@ import { FiHeart, FiEye, FiShoppingBag, FiStar } from 'react-icons/fi';
 import { addToCart, openCart } from '../../../store/slices/cartSlice';
 import toast from 'react-hot-toast';
 
-const IMG_BASE = 'http://localhost:5000';
+const IMG_BASE = (import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000');
 
 export default function ProductCard({ product }) {
   const dispatch = useDispatch();

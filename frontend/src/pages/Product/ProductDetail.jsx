@@ -9,7 +9,7 @@ import { addToCart, openCart } from '../../store/slices/cartSlice';
 import toast from 'react-hot-toast';
 import './ProductDetail.css';
 
-const IMG_BASE = 'http://localhost:5000';
+const IMG_BASE = (import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000');
 
 export default function ProductDetail() {
   const { id } = useParams();

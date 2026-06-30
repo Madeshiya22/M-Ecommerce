@@ -39,7 +39,7 @@ export default function AdminCategories() {
   });
 
   const openCreate = () => { setEditing(null); setForm({ name: '', type: 'tshirt', description: '', isActive: true, sortOrder: 0 }); setImageFile(null); setImagePreview(''); setModalOpen(true); };
-  const openEdit = (cat) => { setEditing(cat); setForm({ name: cat.name, type: cat.type, description: cat.description || '', isActive: cat.isActive, sortOrder: cat.sortOrder || 0 }); setImagePreview(cat.image ? `http://localhost:5000${cat.image}` : ''); setImageFile(null); setModalOpen(true); };
+  const openEdit = (cat) => { setEditing(cat); setForm({ name: cat.name, type: cat.type, description: cat.description || '', isActive: cat.isActive, sortOrder: cat.sortOrder || 0 }); setImagePreview(cat.image ? `${import.meta.env.VITE_BACKEND_URL || (import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000')}${cat.image}` : ''); setImageFile(null); setModalOpen(true); };
   const closeModal = () => { setModalOpen(false); setEditing(null); setImageFile(null); setImagePreview(''); };
 
   const handleImageChange = (e) => {
@@ -97,7 +97,7 @@ export default function AdminCategories() {
               <tr key={cat._id}>
                 <td>
                   <div style={{ width: 48, height: 48, borderRadius: 8, overflow: 'hidden', background: 'var(--clr-surface-2)' }}>
-                    {cat.image ? <img src={`http://localhost:5000${cat.image}`} alt={cat.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} /> : <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--clr-text-faint)', fontSize: '1.2rem' }}>ðŸ“</div>}
+                    {cat.image ? <img src={`${import.meta.env.VITE_BACKEND_URL || (import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000')}${cat.image}`} alt={cat.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} /> : <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--clr-text-faint)', fontSize: '1.2rem' }}>ðŸ“</div>}
                   </div>
                 </td>
                 <td style={{ fontWeight: 600 }}>{cat.name}</td>

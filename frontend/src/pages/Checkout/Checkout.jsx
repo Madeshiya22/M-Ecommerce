@@ -39,7 +39,7 @@ export default function Checkout() {
     </div>
   );
 
-  const IMG_BASE = 'http://localhost:5000';
+  const IMG_BASE = (import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000');
   const getImg = (item) => item.images?.[0]?.url ? `${IMG_BASE}${item.images[0].url}` : '';
 
   const handlePlaceOrder = async () => {

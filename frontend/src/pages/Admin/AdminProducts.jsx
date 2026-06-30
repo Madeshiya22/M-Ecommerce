@@ -67,7 +67,7 @@ export default function AdminProducts() {
       isFeatured: product.isFeatured, isNewArrival: product.isNewArrival, isBestSeller: product.isBestSeller,
       isActive: product.isActive,
     });
-    setImageFiles([]); setImagePreviews(product.images?.map(img => `http://localhost:5000${img.url}`) || []);
+    setImageFiles([]); setImagePreviews(product.images?.map(img => `${import.meta.env.VITE_BACKEND_URL || (import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000')}${img.url}`) || []);
     setModalOpen(true);
   };
   const closeModal = () => { setModalOpen(false); setEditing(null); };
@@ -126,7 +126,7 @@ export default function AdminProducts() {
                 <tr key={p._id}>
                   <td>
                     <div style={{ width: 44, height: 56, borderRadius: 6, overflow: 'hidden', background: 'var(--clr-surface-2)' }}>
-                      {p.images?.[0]?.url ? <img src={`http://localhost:5000${p.images[0].url}`} alt={p.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} /> : <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1rem' }}>ðŸ‘•</div>}
+                      {p.images?.[0]?.url ? <img src={`${import.meta.env.VITE_BACKEND_URL || (import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000')}${p.images[0].url}`} alt={p.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} /> : <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1rem' }}>ðŸ‘•</div>}
                     </div>
                   </td>
                   <td style={{ fontWeight: 600, maxWidth: 180, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{p.name}</td>

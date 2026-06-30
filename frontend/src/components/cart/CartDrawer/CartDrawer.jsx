@@ -11,7 +11,7 @@ export default function CartDrawer() {
   const { items, isOpen, subtotal, shipping, tax, total } = useSelector((s) => s.cart);
 
   const getPrice = (item) => item.discountPrice > 0 ? item.discountPrice : item.price;
-  const getImageUrl = (item) => item.images?.[0]?.url ? `http://localhost:5000${item.images[0].url}` : '/placeholder.png';
+  const getImageUrl = (item) => item.images?.[0]?.url ? `${import.meta.env.VITE_BACKEND_URL || (import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000')}${item.images[0].url}` : '/placeholder.png';
 
   return (
     <AnimatePresence>

@@ -65,7 +65,7 @@ export default function Orders() {
                   {order.items.slice(0, 3).map((item, i) => (
                     <div key={i} className="order-item">
                       <div className="order-item__img">
-                        {item.image && <img src={`http://localhost:5000${item.image}`} alt={item.name} />}
+                        {item.image && <img src={`${import.meta.env.VITE_BACKEND_URL || (import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000')}${item.image}`} alt={item.name} />}
                         {!item.image && <div className="order-item__img-placeholder">{item.name?.[0]}</div>}
                       </div>
                       <div>
