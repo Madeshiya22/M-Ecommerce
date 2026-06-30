@@ -66,15 +66,15 @@ export default function ProductCard({ product }) {
 
           {/* Price Block */}
           <div className="product-card__price">
-            <span className="product-card__price-current">â‚¹{price.toLocaleString('en-IN')}</span>
+            <span className="product-card__price-current">₹{price.toLocaleString('en-IN')}</span>
             {hasDiscount && (
-              <span className="product-card__price-original">â‚¹{product.price.toLocaleString('en-IN')}</span>
+              <span className="product-card__price-original">₹{product.price.toLocaleString('en-IN')}</span>
             )}
           </div>
 
           {/* Best Price */}
           <div className="product-card__best-price">
-            Best price â‚¹{bestPrice.toLocaleString('en-IN')}
+            Best price ₹{bestPrice.toLocaleString('en-IN')}
           </div>
         </div>
       </Link>

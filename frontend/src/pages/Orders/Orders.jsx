@@ -72,7 +72,7 @@ export default function Orders() {
                         <p className="order-item__name">{item.name}</p>
                         <p className="order-item__meta">{item.size} â€¢ {item.color} â€¢ Qty: {item.qty}</p>
                       </div>
-                      <p className="order-item__price">â‚¹{(item.price * item.qty).toLocaleString('en-IN')}</p>
+                      <p className="order-item__price">₹{(item.price * item.qty).toLocaleString('en-IN')}</p>
                     </div>
                   ))}
                   {order.items.length > 3 && (
@@ -85,7 +85,7 @@ export default function Orders() {
                     <span className="order-card__label">Payment: </span>
                     <span className="order-card__value capitalize">{order.paymentMethod === 'cod' ? 'Cash on Delivery' : 'Online'}</span>
                   </div>
-                  <p className="order-card__total">Total: <strong>â‚¹{order.totalPrice.toLocaleString('en-IN')}</strong></p>
+                  <p className="order-card__total">Total: <strong>₹{order.totalPrice.toLocaleString('en-IN')}</strong></p>
                 </div>
               </div>
             ))}

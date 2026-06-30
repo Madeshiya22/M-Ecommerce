@@ -200,8 +200,8 @@ export default function Shop() {
                 <h4 className="filter-group__title">Price Range</h4>
                 <div className="price-range">
                   <div className="price-range__labels">
-                    <span>â‚¹{priceRange[0]}</span>
-                    <span>â‚¹{priceRange[1]}</span>
+                    <span>₹{priceRange[0]}</span>
+                    <span>₹{priceRange[1]}</span>
                   </div>
                   <input
                     type="range"

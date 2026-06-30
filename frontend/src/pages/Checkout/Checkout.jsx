@@ -179,14 +179,14 @@ export default function Checkout() {
                         <p className="checkout-item__name">{item.name}</p>
                         <p className="checkout-item__meta">{item.size} â€¢ {item.color} â€¢ Qty: {item.qty}</p>
                       </div>
-                      <p className="checkout-item__price">â‚¹{((item.discountPrice > 0 ? item.discountPrice : item.price) * item.qty).toLocaleString('en-IN')}</p>
+                      <p className="checkout-item__price">₹{((item.discountPrice > 0 ? item.discountPrice : item.price) * item.qty).toLocaleString('en-IN')}</p>
                     </div>
                   ))}
                 </div>
                 <div className="checkout-nav">
                   <button className="btn btn-ghost" onClick={() => setStep(2)}>â† Back</button>
                   <button className="btn btn-primary" onClick={handlePlaceOrder} disabled={loading}>
-                    {loading ? <span className="spinner" /> : `Place Order Â· â‚¹${total.toLocaleString('en-IN')}`}
+                    {loading ? <span className="spinner" /> : `Place Order · ₹${total.toLocaleString('en-IN')}`}
                   </button>
                 </div>
               </motion.div>
@@ -201,16 +201,16 @@ export default function Checkout() {
                 {items.map((item, i) => (
                   <div key={i} className="checkout-summary__item">
                     <span>{item.name} Ã— {item.qty}</span>
-                    <span>â‚¹{((item.discountPrice > 0 ? item.discountPrice : item.price) * item.qty).toLocaleString('en-IN')}</span>
+                    <span>₹{((item.discountPrice > 0 ? item.discountPrice : item.price) * item.qty).toLocaleString('en-IN')}</span>
                   </div>
                 ))}
               </div>
               <div className="divider" />
               <div className="checkout-summary__totals">
-                <div className="checkout-summary__row"><span>Subtotal</span><span>â‚¹{subtotal.toLocaleString('en-IN')}</span></div>
-                <div className="checkout-summary__row"><span>Shipping</span><span className={shipping === 0 ? 'text-success' : ''}>{shipping === 0 ? 'FREE' : `â‚¹${shipping}`}</span></div>
-                <div className="checkout-summary__row"><span>Tax (5%)</span><span>â‚¹{tax.toLocaleString('en-IN')}</span></div>
-                <div className="checkout-summary__row checkout-summary__row--total"><span>Total</span><span>â‚¹{total.toLocaleString('en-IN')}</span></div>
+                <div className="checkout-summary__row"><span>Subtotal</span><span>₹{subtotal.toLocaleString('en-IN')}</span></div>
+                <div className="checkout-summary__row"><span>Shipping</span><span className={shipping === 0 ? 'text-success' : ''}>{shipping === 0 ? 'FREE' : `₹${shipping}`}</span></div>
+                <div className="checkout-summary__row"><span>Tax (5%)</span><span>₹{tax.toLocaleString('en-IN')}</span></div>
+                <div className="checkout-summary__row checkout-summary__row--total"><span>Total</span><span>₹{total.toLocaleString('en-IN')}</span></div>
               </div>
             </div>
           </div>

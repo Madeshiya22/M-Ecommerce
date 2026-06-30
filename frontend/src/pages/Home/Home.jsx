@@ -34,7 +34,7 @@ const CATEGORIES_DISPLAY = [
 ];
 
 const FEATURES = [
-  { icon: FiTruck, title: 'Complimentary Shipping', desc: 'Enjoy free shipping on orders over â‚¹999.' },
+  { icon: FiTruck, title: 'Complimentary Shipping', desc: 'Enjoy free shipping on orders over ₹999.' },
   { icon: FiRotateCcw, title: 'Hassle-Free Returns', desc: 'Seamless 7-day return and exchange policy.' },
   { icon: FiShield, title: 'Secure Checkout', desc: 'Encrypted transactions for complete security.' },
   { icon: FiStar, title: 'M-Luxury', desc: 'Flawless craftsmanship and superior fabrics.' },
@@ -125,7 +125,7 @@ export default function Home() {
           {/* Bottom Bar */}
           <div className="hero-editorial__bottom-bar">
             <Link to="/new-collection" className="hero-editorial__bottom-left" style={{ color: 'inherit', textDecoration: 'none' }}>New Collection</Link>
-            <Link to="/shop" className="hero-editorial__bottom-right">Shop the Look â†’</Link>
+            <Link to="/shop" className="hero-editorial__bottom-right">Shop the Look →</Link>
           </div>
         </div>
       </section>

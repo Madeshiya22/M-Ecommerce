@@ -46,7 +46,7 @@ export default function CartDrawer() {
             {subtotal < 999 && (
               <div className="cart-drawer__shipping-bar">
                 <p className="cart-drawer__shipping-text">
-                  Add <strong>â‚¹{(999 - subtotal).toFixed(0)}</strong> more for free shipping!
+                  Add <strong>₹{(999 - subtotal).toFixed(0)}</strong> more for free shipping!
                 </p>
                 <div className="cart-drawer__progress-track">
                   <div className="cart-drawer__progress-fill" style={{ width: `${Math.min((subtotal / 999) * 100, 100)}%` }} />
@@ -114,7 +114,7 @@ export default function CartDrawer() {
                               <FiPlus size={12} />
                             </button>
                           </div>
-                          <p className="cart-item__price">â‚¹{(getPrice(item) * item.qty).toLocaleString('en-IN')}</p>
+                          <p className="cart-item__price">₹{(getPrice(item) * item.qty).toLocaleString('en-IN')}</p>
                         </div>
                       </div>
                     </motion.div>
@@ -129,19 +129,19 @@ export default function CartDrawer() {
                 <div className="cart-drawer__summary">
                   <div className="cart-drawer__summary-row">
                     <span>Subtotal</span>
-                    <span>â‚¹{subtotal.toLocaleString('en-IN')}</span>
+                    <span>₹{subtotal.toLocaleString('en-IN')}</span>
                   </div>
                   <div className="cart-drawer__summary-row">
                     <span>Shipping</span>
-                    <span className={shipping === 0 ? 'text-success' : ''}>{shipping === 0 ? 'FREE' : `â‚¹${shipping}`}</span>
+                    <span className={shipping === 0 ? 'text-success' : ''}>{shipping === 0 ? 'FREE' : `₹${shipping}`}</span>
                   </div>
                   <div className="cart-drawer__summary-row">
                     <span>Tax (5%)</span>
-                    <span>â‚¹{tax.toLocaleString('en-IN')}</span>
+                    <span>₹{tax.toLocaleString('en-IN')}</span>
                   </div>
                   <div className="cart-drawer__summary-row cart-drawer__summary-row--total">
                     <span>Total</span>
-                    <span>â‚¹{total.toLocaleString('en-IN')}</span>
+                    <span>₹{total.toLocaleString('en-IN')}</span>
                   </div>
                 </div>
                 <Link to="/checkout" className="btn btn-primary w-full btn-lg" onClick={() => dispatch(closeCart())}>

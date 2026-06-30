@@ -138,10 +138,10 @@ export default function ProductDetail() {
 
             {/* Price */}
             <div className="pd-info__price">
-              <span className="pd-info__price-current">â‚¹{price.toLocaleString('en-IN')}</span>
+              <span className="pd-info__price-current">₹{price.toLocaleString('en-IN')}</span>
               {hasDiscount && (
                 <>
-                  <span className="pd-info__price-original">â‚¹{product.price.toLocaleString('en-IN')}</span>
+                  <span className="pd-info__price-original">₹{product.price.toLocaleString('en-IN')}</span>
                   <span className="badge badge-success">{discount}% OFF</span>
                 </>
               )}
@@ -218,7 +218,7 @@ export default function ProductDetail() {
             <div className="pd-delivery">
               <div className="pd-delivery__item">
                 <FiTruck size={16} />
-                <span>Free delivery on orders above â‚¹999</span>
+                <span>Free delivery on orders above ₹999</span>
               </div>
               <div className="pd-delivery__item">
                 <FiRotateCcw size={16} />

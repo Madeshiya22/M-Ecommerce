@@ -134,8 +134,8 @@ export default function AdminNewCollection() {
                   <td><span className={`badge ${p.type === 'tshirt' ? 'badge-primary' : 'badge-ghost'}`}>{p.type === 'tshirt' ? 'T-Shirt' : 'Shirt'}</span></td>
                   <td>
                     <div>
-                      <span style={{ fontWeight: 700 }}>â‚¹{price.toLocaleString('en-IN')}</span>
-                      {p.discountPrice > 0 && <span style={{ fontSize: '0.72rem', color: 'var(--clr-text-faint)', marginLeft: 6, textDecoration: 'line-through' }}>â‚¹{p.price.toLocaleString('en-IN')}</span>}
+                      <span style={{ fontWeight: 700 }}>₹{price.toLocaleString('en-IN')}</span>
+                      {p.discountPrice > 0 && <span style={{ fontSize: '0.72rem', color: 'var(--clr-text-faint)', marginLeft: 6, textDecoration: 'line-through' }}>₹{p.price.toLocaleString('en-IN')}</span>}
                     </div>
                   </td>
                   <td>
@@ -221,11 +221,11 @@ export default function AdminNewCollection() {
                     </select>
                   </div>
                   <div className="form-group">
-                    <label className="form-label">Price (â‚¹) *</label>
+                    <label className="form-label">Price (₹) *</label>
                     <input type="number" className="form-input" placeholder="1299" value={form.price} onChange={e => setForm({...form, price: e.target.value})} required min="0" />
                   </div>
                   <div className="form-group">
-                    <label className="form-label">Discount Price (â‚¹)</label>
+                    <label className="form-label">Discount Price (₹)</label>
                     <input type="number" className="form-input" placeholder="999 (leave 0 for none)" value={form.discountPrice} onChange={e => setForm({...form, discountPrice: e.target.value})} min="0" />
                   </div>
                   <div className="form-group">

@@ -22,7 +22,7 @@ export default function AdminDashboard() {
     { label: 'Total Products', value: data.totalProducts, icon: FiBox, color: '#FF3C00', bg: 'rgba(255,60,0,0.12)' },
     { label: 'Total Users', value: data.totalUsers, icon: FiUsers, color: '#1677FF', bg: 'rgba(22,119,255,0.12)' },
     { label: 'Total Orders', value: data.totalOrders, icon: FiShoppingCart, color: '#722ED1', bg: 'rgba(114,46,209,0.12)' },
-    { label: 'Total Revenue', value: `â‚¹${(data.totalRevenue || 0).toLocaleString('en-IN')}`, icon: FiDollarSign, color: '#52C41A', bg: 'rgba(82,196,26,0.12)' },
+    { label: 'Total Revenue', value: `₹${(data.totalRevenue || 0).toLocaleString('en-IN')}`, icon: FiDollarSign, color: '#52C41A', bg: 'rgba(82,196,26,0.12)' },
   ] : [];
 
   if (isLoading) return (
@@ -80,7 +80,7 @@ export default function AdminDashboard() {
                     </Link>
                   </td>
                   <td style={{ color: 'var(--clr-text-muted)', fontSize: '0.8rem' }}>{order.user?.name}</td>
-                  <td style={{ fontWeight: 600 }}>â‚¹{order.totalPrice?.toLocaleString('en-IN')}</td>
+                  <td style={{ fontWeight: 600 }}>₹{order.totalPrice?.toLocaleString('en-IN')}</td>
                   <td>
                     <span className="badge" style={{ background: `${STATUS_COLORS[order.status]}18`, color: STATUS_COLORS[order.status] }}>
                       {order.status}
@@ -117,7 +117,7 @@ export default function AdminDashboard() {
                       <span style={{ fontSize: '0.82rem', fontWeight: 600, display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>{p.name}</span>
                     </div>
                   </td>
-                  <td style={{ fontWeight: 600 }}>â‚¹{p.price?.toLocaleString('en-IN')}</td>
+                  <td style={{ fontWeight: 600 }}>₹{p.price?.toLocaleString('en-IN')}</td>
                   <td><span className="badge badge-success">{p.soldCount}</span></td>
                 </tr>
               ))}

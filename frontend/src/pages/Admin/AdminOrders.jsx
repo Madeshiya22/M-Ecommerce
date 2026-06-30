@@ -75,7 +75,7 @@ export default function AdminOrders() {
                   </div>
                 </td>
                 <td style={{ color: 'var(--clr-text-muted)', fontSize: '0.82rem' }}>{order.items?.length} item{order.items?.length !== 1 ? 's' : ''}</td>
-                <td style={{ fontWeight: 700 }}>â‚¹{order.totalPrice?.toLocaleString('en-IN')}</td>
+                <td style={{ fontWeight: 700 }}>₹{order.totalPrice?.toLocaleString('en-IN')}</td>
                 <td><span className="badge badge-ghost" style={{ fontSize: '0.65rem', textTransform: 'uppercase' }}>{order.paymentMethod}</span></td>
                 <td>
                   <span className="badge" style={{ background: `${STATUS_COLORS[order.status]}18`, color: STATUS_COLORS[order.status], fontSize: '0.68rem' }}>
@@ -126,12 +126,12 @@ export default function AdminOrders() {
                   {editingOrder.items?.map((item, i) => (
                     <div key={i} style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.8rem' }}>
                       <span style={{ color: 'var(--clr-text-muted)' }}>{item.name} Ã— {item.qty}</span>
-                      <span style={{ fontWeight: 600 }}>â‚¹{(item.price * item.qty).toLocaleString('en-IN')}</span>
+                      <span style={{ fontWeight: 600 }}>₹{(item.price * item.qty).toLocaleString('en-IN')}</span>
                     </div>
                   ))}
                   <div style={{ borderTop: '1px solid var(--clr-border)', paddingTop: 8, marginTop: 4, display: 'flex', justifyContent: 'space-between', fontWeight: 700 }}>
                     <span>Total</span>
-                    <span>â‚¹{editingOrder.totalPrice?.toLocaleString('en-IN')}</span>
+                    <span>₹{editingOrder.totalPrice?.toLocaleString('en-IN')}</span>
                   </div>
                 </div>
 
