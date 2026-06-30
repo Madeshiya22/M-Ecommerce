@@ -52,11 +52,11 @@ const changePassword = asyncHandler(async (req, res) => {
 // @access Public
 const googleCallback = asyncHandler(async (req, res) => {
   if (!req.user) {
-    return res.redirect('http://localhost:5173/login?error=GoogleAuthFailed');
+    return res.redirect(`${process.env.FRONTEND_URL || 'http://localhost:5173'}/login?error=GoogleAuthFailed`);
   }
-
+  
   const token = authService.handleGoogleCallback(req.user);
-  res.redirect(`http://localhost:5173/oauth/callback?token=${token}`);
+  res.redirect(`${process.env.FRONTEND_URL || 'http://localhost:5173'}/oauth/callback?token=${token}`);
 });
 
 module.exports = { register, login, getMe, updateMe, changePassword, googleCallback };

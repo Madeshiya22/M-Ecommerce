@@ -7,7 +7,7 @@ const { protect } = require('../middleware/auth');
 router.post('/register', register);
 router.post('/login', login);
 router.get('/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
-router.get('/google/callback', passport.authenticate('google', { session: false, failureRedirect: 'http://localhost:5173/login?error=GoogleAuthFailed' }), googleCallback);
+router.get('/google/callback', passport.authenticate('google', { session: false, failureRedirect: `${process.env.FRONTEND_URL || 'http://localhost:5173'}/login?error=GoogleAuthFailed` }), googleCallback);
 router.get('/me', protect, getMe);
 router.put('/me', protect, updateMe);
 router.put('/change-password', protect, changePassword);
