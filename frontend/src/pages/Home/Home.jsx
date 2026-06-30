@@ -1,4 +1,4 @@
-﻿import React, { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { useQuery } from '@tanstack/react-query';
@@ -7,6 +7,11 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { productService } from '../../api/productApi';
 import ProductCard from '../../components/product/ProductCard/ProductCard';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Autoplay, Pagination } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/pagination';
+import 'swiper/css/autoplay';
 import './Home.css';
 import leftImg from '../../assets/left.png';
 import rightImg from '../../assets/right.png';
@@ -100,24 +105,50 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Right Column: Floating Tilted Image Cards with smooth hover upward animation */}
+            {/* Right Column: Visuals */}
             <div className="hero-editorial__visual-col">
-              <div className="hero-editorial__card-wrapper hero-editorial__card-wrapper--1">
-                <div className="hero-editorial__card hero-editorial__card--1">
-                  <img src="https://i.pinimg.com/1200x/96/e7/b0/96e7b09ff2a8885e0ce2cbb119eb6584.jpg" alt="M-Collection Premium T-Shirt" />
+              {/* Desktop Cards */}
+              <div className="desktop-cards">
+                <div className="hero-editorial__card-wrapper hero-editorial__card-wrapper--1">
+                  <div className="hero-editorial__card hero-editorial__card--1">
+                    <img src="https://i.pinimg.com/1200x/96/e7/b0/96e7b09ff2a8885e0ce2cbb119eb6584.jpg" alt="M-Collection Premium T-Shirt" />
+                  </div>
+                </div>
+                <div className="hero-editorial__card-wrapper hero-editorial__card-wrapper--2">
+                  <div className="hero-editorial__card hero-editorial__card--2">
+                    <img src="https://i.pinimg.com/736x/80/a9/a8/80a9a8c6db47f9615f61fb2bcb6e1a3f.jpg" alt="M-Collection Casual Shirt" />
+                  </div>
+                </div>
+                <div className="hero-editorial__card-wrapper hero-editorial__card-wrapper--3">
+                  <div className="hero-editorial__card hero-editorial__card--3">
+                    <img src="/third_hero_image.jpg" alt="M-Collection Premium Shirt" />
+                  </div>
                 </div>
               </div>
 
-              <div className="hero-editorial__card-wrapper hero-editorial__card-wrapper--2">
-                <div className="hero-editorial__card hero-editorial__card--2">
-                  <img src="https://i.pinimg.com/736x/80/a9/a8/80a9a8c6db47f9615f61fb2bcb6e1a3f.jpg" alt="M-Collection Casual Shirt" />
-                </div>
-              </div>
-
-              <div className="hero-editorial__card-wrapper hero-editorial__card-wrapper--3">
-                <div className="hero-editorial__card hero-editorial__card--3">
-                  <img src="/third_hero_image.jpg" alt="M-Collection Premium Shirt" />
-                </div>
+              {/* Mobile Carousel */}
+              <div className="mobile-swiper-wrapper">
+                <Swiper
+                  modules={[Autoplay, Pagination]}
+                  spaceBetween={0}
+                  slidesPerView={1}
+                  loop={true}
+                  autoplay={{ delay: 3000, disableOnInteraction: false }}
+                  pagination={{ clickable: true }}
+                  grabCursor={true}
+                  speed={500}
+                  className="hero-swiper"
+                >
+                  <SwiperSlide>
+                    <img loading="lazy" src="https://i.pinimg.com/1200x/96/e7/b0/96e7b09ff2a8885e0ce2cbb119eb6584.jpg" alt="M-Collection Premium T-Shirt" />
+                  </SwiperSlide>
+                  <SwiperSlide>
+                    <img loading="lazy" src="https://i.pinimg.com/736x/80/a9/a8/80a9a8c6db47f9615f61fb2bcb6e1a3f.jpg" alt="M-Collection Casual Shirt" />
+                  </SwiperSlide>
+                  <SwiperSlide>
+                    <img loading="lazy" src="/third_hero_image.jpg" alt="M-Collection Premium Shirt" />
+                  </SwiperSlide>
+                </Swiper>
               </div>
             </div>
           </div>
@@ -148,12 +179,12 @@ export default function Home() {
       {/* â”€â”€ Dual Image Section â”€â”€ */}
       <section className="dual-image-section gsap-fade-up">
         <div className="dual-image-wrapper">
-          <div className="dual-image-left">
-            <img src={leftImg} alt="Left" />
-          </div>
-          <div className="dual-image-right">
-            <img src={rightImg} alt="Right" />
-          </div>
+          <Link to="/shop?type=tshirt" className="dual-image-left">
+            <img src={leftImg} alt="T-Shirts" />
+          </Link>
+          <Link to="/shop?type=shirt" className="dual-image-right">
+            <img src={rightImg} alt="Shirts" />
+          </Link>
         </div>
       </section>
 

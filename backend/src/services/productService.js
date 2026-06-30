@@ -9,19 +9,44 @@ const getProducts = async (query) => {
 
   const filter = { isActive: true };
 
-  if (keyword) filter.name = { $regex: keyword, $options: 'i' };
+  const andConditions = [];
+
+  if (keyword) {
+    const keywordRegex = { $regex: keyword, $options: 'i' };
+    const normalizedKeyword = keyword.replace(/\s+/g, '');
+    const normalizedRegex = { $regex: normalizedKeyword, $options: 'i' };
+    
+    andConditions.push({
+      $or: [
+        { name: keywordRegex },
+        { type: keywordRegex },
+        { type: normalizedRegex },
+        { tags: keywordRegex },
+        { tags: normalizedRegex },
+        { description: keywordRegex }
+      ]
+    });
+  }
+
   if (category) filter.category = category;
   if (type) filter.type = type;
   if (size) filter.sizes = { $in: size.split(',') };
   if (color) filter['colors.name'] = { $regex: color, $options: 'i' };
+  
   if (minPrice || maxPrice) {
-    filter.$or = [
-      { discountPrice: { ...(minPrice && { $gte: Number(minPrice) }), ...(maxPrice && { $lte: Number(maxPrice) }) } },
-      {
-        price: { ...(minPrice && { $gte: Number(minPrice) }), ...(maxPrice && { $lte: Number(maxPrice) }) },
-        discountPrice: 0,
-      },
-    ];
+    andConditions.push({
+      $or: [
+        { discountPrice: { ...(minPrice && { $gte: Number(minPrice) }), ...(maxPrice && { $lte: Number(maxPrice) }) } },
+        {
+          price: { ...(minPrice && { $gte: Number(minPrice) }), ...(maxPrice && { $lte: Number(maxPrice) }) },
+          discountPrice: 0,
+        },
+      ]
+    });
+  }
+
+  if (andConditions.length > 0) {
+    filter.$and = andConditions;
   }
   if (featured === 'true') filter.isFeatured = true;
   if (newArrival === 'true') filter.isNewArrival = true;

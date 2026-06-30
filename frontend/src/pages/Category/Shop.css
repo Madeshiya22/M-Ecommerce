@@ -275,3 +275,28 @@
   .shop-filter-toggle { display: flex; }
   .shop-sidebar__mobile-close { display: flex; }
 }
+
+@media (max-width: 500px) {
+  .shop-header__inner {
+    gap: 8px;
+    flex-wrap: nowrap;
+  }
+  .shop-header__title {
+    font-size: 1.4rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .shop-header__controls {
+    gap: 8px;
+  }
+  .shop-sort {
+    min-width: 120px;
+    padding: 6px 8px;
+    font-size: 0.75rem;
+  }
+  .shop-filter-toggle {
+    padding: 6px 8px;
+    font-size: 0.75rem;
+  }
+}
