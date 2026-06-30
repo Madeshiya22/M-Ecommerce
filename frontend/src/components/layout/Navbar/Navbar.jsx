@@ -1,4 +1,4 @@
-﻿import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { toggleTheme } from '../../../store/slices/themeSlice';
@@ -148,9 +148,14 @@ const Navbar = () => {
               <FiUser size={20} />
             </button>
           ) : (
-            <Link to="/login" className="navbar__auth-btn">
-              Login
-            </Link>
+            <div style={{ display: 'flex', gap: '0.75rem' }}>
+              <Link to="/login" className="navbar__auth-btn" style={{ background: 'transparent', color: 'var(--clr-text)', border: '1px solid var(--clr-border)' }}>
+                Login
+              </Link>
+              <Link to="/register" className="navbar__auth-btn">
+                Sign Up
+              </Link>
+            </div>
           )}
         </div>
       </div>
