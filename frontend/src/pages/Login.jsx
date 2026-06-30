@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { useGoogleLogin } from '@react-oauth/google';
 import { 
   FiMail, FiLock, FiEye, FiEyeOff, FiLogIn
 } from 'react-icons/fi';
@@ -41,23 +40,9 @@ export default function Login() {
     }
   };
 
-  const googleLogin = useGoogleLogin({
-    onSuccess: async (tokenResponse) => {
-      setGoogleLoading(true);
-      try {
-        const res = await authService.googleLogin(tokenResponse.access_token);
-        const { token, ...user } = res.data.data;
-        dispatch(loginSuccess({ user, token }));
-        toast.success(`Welcome back, ${user.name}! 🎉`);
-        navigate(from, { replace: true });
-      } catch (err) {
-        toast.error(err.response?.data?.message || 'Google login failed');
-      } finally {
-        setGoogleLoading(false);
-      }
-    },
-    onError: () => toast.error('Google sign-in was cancelled or failed'),
-  });
+  const handleGoogleLogin = () => {
+    window.location.href = 'http://localhost:5000/api/auth/google';
+  };
 
   return (
     <div className="auth-page">
@@ -138,8 +123,8 @@ export default function Login() {
           </div>
           
           <div className="auth-social-wrap">
-            <button className="auth-btn-social" type="button" onClick={() => googleLogin()} disabled={googleLoading}>
-              <FaGoogle color="#DB4437" /> {googleLoading ? 'Connecting...' : 'Login with Google'}
+            <button className="auth-btn-social" type="button" onClick={handleGoogleLogin}>
+              <FaGoogle color="#DB4437" /> Login with Google
             </button>
             <button className="auth-btn-social" type="button" onClick={() => toast('Facebook auth coming soon!')}>
               <FaFacebookF color="#4267B2" /> Login with Facebook

@@ -16,6 +16,7 @@ import NewCollection from './pages/NewCollection';
 import ProductDetail from './pages/ProductDetail';
 import Login from './pages/Login';
 import Register from './pages/Register';
+import OAuthCallback from './pages/OAuthCallback';
 import Checkout from './pages/Checkout';
 import Orders from './pages/Orders';
 
@@ -84,10 +85,12 @@ function AppRoutes() {
         {/* Public routes */}
         <Route path="/" element={<MainLayout><Home /></MainLayout>} />
         <Route path="/shop" element={<MainLayout><Shop /></MainLayout>} />
+        <Route path="/products" element={<MainLayout><Shop /></MainLayout>} />
         <Route path="/new-collection" element={<MainLayout><NewCollection /></MainLayout>} />
         <Route path="/product/:id" element={<MainLayout><ProductDetail /></MainLayout>} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/oauth/callback" element={<OAuthCallback />} />
 
         {/* Private routes */}
         <Route path="/checkout" element={<PrivateRoute><MainLayout><Checkout /></MainLayout></PrivateRoute>} />

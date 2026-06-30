@@ -25,6 +25,10 @@ const app = express();
 // Connect DB
 connectDB();
 
+// Passport config
+require('./src/config/passport');
+
+
 // Middleware
 app.use(cors({
   origin: ['http://localhost:5173', 'http://localhost:3000'],

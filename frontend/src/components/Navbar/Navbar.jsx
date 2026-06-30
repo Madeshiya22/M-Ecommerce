@@ -86,6 +86,9 @@ const Navbar = () => {
               <Link to="/products?type=shirt&fabric=denim" className="navbar__dropdown-item">Denim</Link>
             </div>
           </div>
+          <Link to="/new-collection" className="navbar__link">
+            New Collection
+          </Link>
           <Link to="/about" className="navbar__link">
             About
           </Link>
