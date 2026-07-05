@@ -2,13 +2,13 @@
 .hero-editorial {
   position: relative;
   width: 100%;
-  height: 100vh;
-  max-height: 100vh;
+  height: calc(100vh + 38px);
+  max-height: none;
   background: var(--clr-bg);
   display: block;
   overflow: hidden;
   border-bottom: 1px solid var(--clr-border);
-  padding-top: 102px;
+  padding-top: 140px;
   /* Accounts for fixed navbar + marquee bar so content begins exactly below */
   box-sizing: border-box;
 }
@@ -19,7 +19,7 @@
   justify-content: space-between;
   width: 100%;
   height: calc(100vh - 102px);
-  max-height: calc(100vh - 102px);
+  max-height: none;
   min-height: 0;
   overflow: hidden;
   padding-top: 10px;

@@ -14,6 +14,7 @@ const Navbar = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
 
   const authState = useSelector((state) => state.auth || {});
   const user = authState.user;
@@ -39,8 +40,16 @@ const Navbar = () => {
     }
   };
 
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
-    <header className="navbar">
+    <header className={`navbar ${isScrolled ? 'navbar--scrolled' : ''}`}>
       {/* --- Top Moving Marquee Bar --- */}
       <div className="navbar__marquee">
         <div className="navbar__marquee-track">
