@@ -41,12 +41,12 @@ const Navbar = () => {
 
   return (
     <header className="navbar">
-      {/* â”€â”€â”€ Top Moving Marquee Bar â”€â”€â”€ */}
+      {/* --- Top Moving Marquee Bar --- */}
       <div className="navbar__marquee">
         <div className="navbar__marquee-track">
           {Array(8).fill(0).map((_, i) => (
             <span key={i}>
-              <span className="text-brown">M</span>-Collection &nbsp;&nbsp;â€¢&nbsp;&nbsp; CASUAL SHIRTS &nbsp;&nbsp;â€¢&nbsp;&nbsp; T-SHIRTS &nbsp;&nbsp;â€¢&nbsp;&nbsp; FORMALS &nbsp;&nbsp;&nbsp;&nbsp;
+              <span className="text-brown">M</span>-Collection &nbsp;&nbsp;&bull;&nbsp;&nbsp; CASUAL SHIRTS &nbsp;&nbsp;&bull;&nbsp;&nbsp; T-SHIRTS &nbsp;&nbsp;&bull;&nbsp;&nbsp; FORMALS &nbsp;&nbsp;&nbsp;&nbsp;
             </span>
           ))}
         </div>
