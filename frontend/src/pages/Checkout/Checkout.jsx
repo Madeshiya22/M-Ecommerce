@@ -1,8 +1,8 @@
-﻿import React, { useState } from 'react';
+import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { motion } from 'framer-motion';
-import { FiMapPin, FiPhone, FiUser, FiCheck } from 'react-icons/fi';
+import { FiMapPin, FiPhone, FiUser, FiCheck, FiBox, FiCreditCard, FiArrowLeft } from 'react-icons/fi';
 import { orderService } from '../../api/orderApi';
 import { clearCart } from '../../store/slices/cartSlice';
 import toast from 'react-hot-toast';
@@ -130,8 +130,8 @@ export default function Checkout() {
                 <h2 className="checkout-card__title">Payment Method</h2>
                 <div className="payment-options">
                   {[
-                    { id: 'cod', label: 'Cash on Delivery', desc: 'Pay when you receive', icon: 'ðŸ’µ' },
-                    { id: 'online', label: 'Pay Online (Mock)', desc: 'Cards, UPI, Wallets', icon: 'ðŸ’³' },
+                    { id: 'cod', label: 'Cash on Delivery', desc: 'Pay when you receive', icon: <FiBox size={20} /> },
+                    { id: 'online', label: 'Pay Online (Mock)', desc: 'Cards, UPI, Wallets', icon: <FiCreditCard size={20} /> },
                   ].map(opt => (
                     <button
                       key={opt.id}
@@ -148,7 +148,7 @@ export default function Checkout() {
                   ))}
                 </div>
                 <div className="checkout-nav">
-                  <button className="btn btn-ghost" onClick={() => setStep(1)}>â† Back</button>
+                  <button className="btn btn-ghost" onClick={() => setStep(1)} style={{ display: 'flex', alignItems: 'center', gap: '8px' }}><FiArrowLeft /> Back</button>
                   <button className="btn btn-primary" onClick={() => setStep(3)}>Review Order</button>
                 </div>
               </motion.div>
@@ -160,13 +160,15 @@ export default function Checkout() {
                 <h2 className="checkout-card__title">Review Order</h2>
                 <div className="review-section">
                   <h3 className="review-section__title">Delivery Address</h3>
-                  <p className="review-section__text">{address.name} â€¢ {address.phone}</p>
+                  <p className="review-section__text">{address.name} • {address.phone}</p>
                   <p className="review-section__text">{address.street}, {address.city}, {address.state} - {address.pincode}</p>
                   <button className="review-section__edit" onClick={() => setStep(1)}>Edit</button>
                 </div>
                 <div className="review-section">
                   <h3 className="review-section__title">Payment</h3>
-                  <p className="review-section__text">{paymentMethod === 'cod' ? 'ðŸ’µ Cash on Delivery' : 'ðŸ’³ Online Payment'}</p>
+                  <p className="review-section__text" style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                    {paymentMethod === 'cod' ? <><FiBox/> Cash on Delivery</> : <><FiCreditCard/> Online Payment</>}
+                  </p>
                   <button className="review-section__edit" onClick={() => setStep(2)}>Edit</button>
                 </div>
                 <div className="checkout-order-items">
@@ -177,7 +179,7 @@ export default function Checkout() {
                       </div>
                       <div className="checkout-item__info">
                         <p className="checkout-item__name">{item.name}</p>
-                        <p className="checkout-item__meta">{item.size} â€¢ {item.color} â€¢ Qty: {item.qty}</p>
+                        <p className="checkout-item__meta">{item.size} • {item.color} • Qty: {item.qty}</p>
                       </div>
                       <p className="checkout-item__price">₹{((item.discountPrice > 0 ? item.discountPrice : item.price) * item.qty).toLocaleString('en-IN')}</p>
                     </div>
