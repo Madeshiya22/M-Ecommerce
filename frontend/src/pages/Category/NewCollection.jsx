@@ -5,6 +5,7 @@ import ProductCard from '../../components/product/ProductCard/ProductCard';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { FiArrowDown } from 'react-icons/fi';
+import './NewCollection.css';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -54,34 +55,15 @@ export default function NewCollection() {
   return (
     <div className="new-collection-page">
       {/* Hero Section */}
-      <section className="new-col-hero" style={{ 
-        paddingTop: '140px',
-        paddingBottom: 'var(--space-24)',
-        textAlign: 'center',
-        background: 'var(--clr-surface)',
-        borderBottom: '1px solid var(--clr-border)',
-        marginBottom: 'var(--space-16)'
-      }}>
+      <section className="new-col-hero">
         <div className="container">
-          <h1 className="new-col-hero__title" style={{ 
-            fontFamily: 'var(--font-display)', 
-            fontSize: 'clamp(3rem, 6vw, 5rem)',
-            textTransform: 'uppercase',
-            letterSpacing: '0.02em',
-            lineHeight: 1,
-            marginBottom: 'var(--space-4)'
-          }}>
+          <h1 className="new-col-hero__title">
             New <span className="text-brown">Collection</span>
           </h1>
-          <p className="new-col-hero__subtitle" style={{
-            fontSize: '1.1rem',
-            color: 'var(--clr-text-muted)',
-            maxWidth: '600px',
-            margin: '0 auto var(--space-8)'
-          }}>
+          <p className="new-col-hero__subtitle">
             Discover our latest arrivals. Impeccable craftsmanship meets modern aesthetics in our newest drop of premium apparel.
           </p>
-          <div style={{ color: 'var(--clr-primary)', animation: 'bounce 2s infinite' }}>
+          <div className="new-col-hero__arrow">
             <FiArrowDown size={24} />
           </div>
         </div>

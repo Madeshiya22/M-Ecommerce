@@ -1,0 +1,49 @@
+/* NewCollection.css */
+.new-col-hero {
+  padding-top: 140px;
+  padding-bottom: var(--space-24);
+  text-align: center;
+  background: var(--clr-surface);
+  border-bottom: 1px solid var(--clr-border);
+  margin-bottom: var(--space-16);
+}
+
+.new-col-hero__title {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 6vw, 5rem);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  line-height: 1.1;
+  margin-bottom: var(--space-4);
+  white-space: nowrap; /* Forces text to stay on one line if possible */
+}
+
+.new-col-hero__subtitle {
+  font-size: 1.1rem;
+  color: var(--clr-text-muted);
+  max-width: 600px;
+  margin: 0 auto var(--space-8);
+  line-height: 1.6;
+}
+
+.new-col-hero__arrow {
+  color: var(--clr-primary);
+  animation: bounce 2s infinite;
+}
+
+@media (max-width: 640px) {
+  .new-col-hero {
+    padding-top: 110px; /* Reduced top padding for smaller height */
+    padding-bottom: var(--space-12); /* Reduced bottom padding */
+    margin-bottom: var(--space-8);
+  }
+  .new-col-hero__title {
+    font-size: clamp(1.7rem, 8vw, 2.5rem); /* Smaller size to guarantee single line */
+    letter-spacing: 0;
+  }
+  .new-col-hero__subtitle {
+    font-size: 0.85rem; /* Smaller font to fit in ~2 lines */
+    max-width: 95%; /* Use more horizontal space */
+    margin-bottom: var(--space-6);
+  }
+}
