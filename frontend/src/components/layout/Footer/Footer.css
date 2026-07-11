@@ -188,12 +188,13 @@
 
 @media (max-width: 640px) {
   .footer__top {
-    grid-template-columns: 1fr 1fr;
-    gap: var(--space-6);
-    padding: var(--space-10) 0;
+    grid-template-columns: 1fr;
+    gap: var(--space-8);
+    padding: var(--space-10) var(--space-6);
   }
   .footer__bottom {
     flex-direction: column;
     text-align: center;
+    padding: var(--space-6);
   }
 }
