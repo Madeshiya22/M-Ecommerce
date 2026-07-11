@@ -19,7 +19,7 @@ export default function ProductDetail() {
   const [selectedColor, setSelectedColor] = useState('');
   const [activeImg, setActiveImg] = useState(0);
   const [qty, setQty] = useState(1);
-  const [reviewForm, setReviewForm] = useState({ rating: 5, comment: '' });
+  const [reviewForm, setReviewForm] = useState({ rating: 0, comment: '' });
   const [activeTab, setActiveTab] = useState('description');
 
   const { data: product, isLoading } = useQuery({
@@ -68,10 +68,11 @@ export default function ProductDetail() {
   const handleReview = async (e) => {
     e.preventDefault();
     if (!isAuthenticated) return toast.error('Please login to review');
+    if (reviewForm.rating === 0) return toast.error('Please select a rating');
     try {
       await productService.addReview(id, reviewForm);
       toast.success('Review added successfully!');
-      setReviewForm({ rating: 5, comment: '' });
+      setReviewForm({ rating: 0, comment: '' });
     } catch (err) {
       toast.error(err.response?.data?.message || 'Failed to add review');
     }
