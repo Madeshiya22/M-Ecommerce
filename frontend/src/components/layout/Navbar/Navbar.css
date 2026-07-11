@@ -14,7 +14,7 @@
 }
 
 .navbar--scrolled {
-  background-color: rgba(255, 255, 255, 0.9) !important;
+  background-color: rgba(255, 255, 255, 0.8) !important;
   backdrop-filter: blur(30px) !important;
   -webkit-backdrop-filter: blur(30px) !important;
   border-bottom: 1px solid rgba(0, 0, 0, 0.05);
@@ -180,7 +180,9 @@
 }
 
 .navbar__dropdown-menu {
-  display: none;
+  display: flex;
+  flex-direction: column;
+  visibility: hidden;
   position: absolute;
   top: 100%;
   left: 0;
@@ -196,8 +198,7 @@
 }
 
 .navbar__dropdown:hover .navbar__dropdown-menu {
-  display: flex;
-  flex-direction: column;
+  visibility: visible;
   opacity: 1;
   transform: translateY(0);
 }
@@ -402,12 +403,16 @@
   }
   .navbar__hamburger {
     display: flex;
+    margin-left: 0.5rem;
   }
   .navbar__desktop-auth {
     display: none;
   }
   .navbar__inner {
-    justify-content: space-between;
+    justify-content: flex-start;
+  }
+  .navbar__actions {
+    margin-left: auto;
   }
 }
 
