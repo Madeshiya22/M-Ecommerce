@@ -292,10 +292,10 @@ export default function Home() {
         </section>
       )}
 
-      {/* â”€â”€ Brand Strip â”€â”€ */}
+      {/* --- Brand Strip --- */}
       <section className="brand-strip-minimal gsap-fade-up">
         <div className="container">
-          <p className="brand-strip-minimal__text"><span style={{ color: '#8B5A2B' }}>M</span>-COLLECTION â€” PURE ELEGANCE, UNCOMPROMISED QUALITY.</p>
+          <p className="brand-strip-minimal__text"><span style={{ color: '#8B5A2B' }}>M</span>-COLLECTION - PURE ELEGANCE, UNCOMPROMISED QUALITY.</p>
         </div>
       </section>
 
