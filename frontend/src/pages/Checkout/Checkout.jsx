@@ -186,7 +186,7 @@ export default function Checkout() {
                   ))}
                 </div>
                 <div className="checkout-nav">
-                  <button className="btn btn-ghost" onClick={() => setStep(2)}>â† Back</button>
+                  <button className="btn btn-ghost" onClick={() => setStep(2)} style={{ display: 'flex', alignItems: 'center', gap: '8px' }}><FiArrowLeft /> Back</button>
                   <button className="btn btn-primary" onClick={handlePlaceOrder} disabled={loading}>
                     {loading ? <span className="spinner" /> : `Place Order · ₹${total.toLocaleString('en-IN')}`}
                   </button>
@@ -202,7 +202,7 @@ export default function Checkout() {
               <div className="checkout-summary__items">
                 {items.map((item, i) => (
                   <div key={i} className="checkout-summary__item">
-                    <span>{item.name} Ã— {item.qty}</span>
+                    <span>{item.name} × {item.qty}</span>
                     <span>₹{((item.discountPrice > 0 ? item.discountPrice : item.price) * item.qty).toLocaleString('en-IN')}</span>
                   </div>
                 ))}
