@@ -1,4 +1,4 @@
-﻿import React, { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { productService } from '../../api/productApi';
 import ProductCard from '../../components/product/ProductCard/ProductCard';
@@ -55,7 +55,8 @@ export default function NewCollection() {
     <div className="new-collection-page">
       {/* Hero Section */}
       <section className="new-col-hero" style={{ 
-        padding: 'var(--space-24) 0', 
+        paddingTop: '140px',
+        paddingBottom: 'var(--space-24)',
         textAlign: 'center',
         background: 'var(--clr-surface)',
         borderBottom: '1px solid var(--clr-border)',
