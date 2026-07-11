@@ -1,5 +1,6 @@
 .shop-page {
   min-height: 100vh;
+  padding-top: 95px; /* Clears the fixed navbar (marquee 30px + inner 65px) */
 }
 
 .shop-header {
@@ -7,7 +8,7 @@
   border-bottom: 1px solid var(--clr-border);
   background: var(--clr-surface);
   position: sticky;
-  top: 70px;
+  top: 95px; /* Sticks exactly below the navbar */
   z-index: 50;
 }
 
