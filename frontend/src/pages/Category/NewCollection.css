@@ -33,17 +33,19 @@
 
 @media (max-width: 640px) {
   .new-col-hero {
-    padding-top: 110px; /* Reduced top padding for smaller height */
-    padding-bottom: var(--space-12); /* Reduced bottom padding */
-    margin-bottom: var(--space-8);
+    padding-top: 95px; /* Minimum padding to just clear the navbar */
+    padding-bottom: var(--space-2); /* Extremely small bottom padding */
+    margin-bottom: var(--space-4); /* Reduced margin */
   }
   .new-col-hero__title {
-    font-size: clamp(1.7rem, 8vw, 2.5rem); /* Smaller size to guarantee single line */
+    font-size: clamp(1.7rem, 8vw, 2.5rem); 
     letter-spacing: 0;
+    margin-bottom: var(--space-3);
   }
   .new-col-hero__subtitle {
-    font-size: 0.85rem; /* Smaller font to fit in ~2 lines */
-    max-width: 95%; /* Use more horizontal space */
-    margin-bottom: var(--space-6);
+    font-size: 0.75rem; /* Reduced font size to guarantee 2 lines */
+    max-width: 100%; /* Take full width of container */
+    margin-bottom: var(--space-2); /* Less space before arrow */
+    line-height: 1.5;
   }
 }
