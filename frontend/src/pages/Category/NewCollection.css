@@ -33,7 +33,7 @@
 
 @media (max-width: 640px) {
   .new-col-hero {
-    padding-top: 95px; /* Minimum padding to just clear the navbar */
+    padding-top: 105px; /* Slightly reduced top padding to bring text a bit higher */
     padding-bottom: var(--space-2); /* Extremely small bottom padding */
     margin-bottom: var(--space-4); /* Reduced margin */
   }
