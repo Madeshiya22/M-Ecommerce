@@ -14,17 +14,17 @@
 }
 
 .navbar--scrolled {
-  background-color: rgba(255, 255, 255, 0.8) !important;
-  backdrop-filter: blur(30px) !important;
-  -webkit-backdrop-filter: blur(30px) !important;
+  background-color: rgba(255, 255, 255, 0.5) !important;
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
   border-bottom: 1px solid rgba(0, 0, 0, 0.05);
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
 }
 
 [data-theme="dark"] .navbar--scrolled {
-  background-color: rgba(0, 0, 0, 0.8) !important;
-  backdrop-filter: blur(30px) !important;
-  -webkit-backdrop-filter: blur(30px) !important;
+  background-color: rgba(0, 0, 0, 0.5) !important;
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
 }
