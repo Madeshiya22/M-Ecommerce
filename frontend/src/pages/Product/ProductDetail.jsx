@@ -1,4 +1,4 @@
-﻿import React, { useState } from 'react';
+import React, { useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -280,7 +280,9 @@ export default function ProductDetail() {
                       <label className="form-label">Rating</label>
                       <div className="pd-review-stars">
                         {[1,2,3,4,5].map(s => (
-                          <button key={s} type="button" onClick={() => setReviewForm({...reviewForm, rating: s})} style={{ fontSize: '1.3rem', color: s <= reviewForm.rating ? 'var(--clr-gold)' : 'var(--clr-text-faint)' }}>â˜…</button>
+                          <button key={s} type="button" onClick={() => setReviewForm({...reviewForm, rating: s})} style={{ color: s <= reviewForm.rating ? 'var(--clr-gold)' : 'var(--clr-text-faint)' }}>
+                            <FiStar size={20} style={{ fill: s <= reviewForm.rating ? 'currentColor' : 'none' }} />
+                          </button>
                         ))}
                       </div>
                     </div>
