@@ -22,7 +22,7 @@
 }
 
 [data-theme="dark"] .navbar--scrolled {
-  background-color: rgba(49, 49, 49, 0.401) !important;
+  background-color: rgba(0, 0, 0, 0.8) !important;
   backdrop-filter: blur(30px) !important;
   -webkit-backdrop-filter: blur(30px) !important;
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
