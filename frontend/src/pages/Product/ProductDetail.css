@@ -307,11 +307,15 @@
 }
 
 .pd-tabs__tab {
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid transparent;
+  outline: none;
+  cursor: pointer;
   padding: 12px 24px;
   font-size: 0.85rem;
   font-weight: 600;
   color: var(--clr-text-muted);
-  border-bottom: 2px solid transparent;
   margin-bottom: -1px;
   transition: all var(--transition-fast);
   text-transform: uppercase;
